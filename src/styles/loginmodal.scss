@@ -1,0 +1,19 @@
+.login-modal {
+    .text-inputs {
+        .text-input {
+            margin-bottom: 1rem;
+        }  
+    }
+    .signin-button {
+        left: 0;
+        width: 100%;
+        margin-top: 1rem;
+    }
+    .signup-text {
+        color: grey;
+        text-align: center;
+        &:hover {
+            cursor: pointer;
+        }
+    }
+}
