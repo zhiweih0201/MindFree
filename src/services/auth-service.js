@@ -26,7 +26,19 @@ class AuthService {
     }
 
     signup(signupObject) {
-
+        // Make a request for a user with a given ID
+        axios.post(this.apiBaseUrl + '/signup', signupObject)
+            .then(function (response) {
+                // handle success
+                console.log('signup', response);
+            })
+            .catch(function (error) {
+                // handle error
+                console.log('signup', error);
+            })
+            .then(function () {
+                // always executed
+            });
     }
 }
 

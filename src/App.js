@@ -1,5 +1,6 @@
 import logo from './logo.svg';
 import LoginPage from './pages/LoginPage';
+import SignupPage from './pages/SignupPage';
 // import './App.css';
 
 function App() {
@@ -7,8 +8,8 @@ function App() {
     <div className="App">
       <header className="App-header">
         
-        <LoginPage />
-        
+        {/* <LoginPage /> */}
+        <SignupPage />
       </header>
     </div>
   );
