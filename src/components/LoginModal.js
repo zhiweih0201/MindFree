@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { TextInput, PasswordInput, Button } from '@mantine/core';
 import '../styles/loginmodal.scss';
-import AuthService from '../services/auth-service';
+import AuthService from '../services/auth-service'
 
 export default function LoginModal(props) {
 
@@ -14,6 +14,7 @@ export default function LoginModal(props) {
             username: pennKey,
             password: password
         })
+        
     }
 
     return (

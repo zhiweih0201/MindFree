@@ -1,5 +1,3 @@
-// Declaration
-
 import axios from "axios";
 
 class AuthService {
@@ -14,15 +12,16 @@ class AuthService {
         axios.post(this.apiBaseUrl + '/login', loginObject)
             .then(function (response) {
                 // handle success
-                console.log('login', response);
+                console.log('login success', response);
+                
+
             })
             .catch(function (error) {
                 // handle error
-                console.log('login', error);
+                console.log('login error', error);
             })
-            .then(function () {
-                // always executed
-            });
+
+
     }
 
     signup(signupObject) {
