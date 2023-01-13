@@ -35,7 +35,7 @@ export default function LoginModal(props) {
             <Button onClick={login} className='signin-button' color=''>
                 Sign In
             </Button>
-            <p className='signup-text'>Don't have an account? Sign up</p>
+            <a href={`/signup`}><p className='signup-text'>Don't have an account? Sign up</p></a>
         </div>
     );
 }

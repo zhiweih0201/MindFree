@@ -1,18 +1,33 @@
 import logo from './logo.svg';
+import React from "react";
 import LoginPage from './pages/LoginPage';
 import SignupPage from './pages/SignupPage';
+import ReactDOM from "react-dom/client";
+import {
+  createBrowserRouter,
+  RouterProvider,
+} from "react-router-dom";
 // import './App.css';
 
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <LoginPage />,
+    // errorElement: <ErrorPage />,
+  },
+  {
+    path: "/signup",
+    element: <SignupPage />,
+  },
+]);
+
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        
-        {/* <LoginPage /> */}
-        <SignupPage />
-      </header>
-    </div>
+  return ReactDOM.createRoot(document.getElementById("root")).render(
+    <React.StrictMode>
+      <RouterProvider router={router} />
+    </React.StrictMode>
   );
+
 }
 
 export default App;
