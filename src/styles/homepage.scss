@@ -1,0 +1,127 @@
+.main-text {
+    position: absolute;
+    width: 544px;
+    height: 135px;
+    top: 56px;
+    left: 400px;
+
+    font-family: 'Coiny';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 96px;
+    line-height: 194.52%;
+
+    text-align: center;
+    color: #FF996D;
+}
+
+.explain-text {
+    position: absolute;
+    width: 765px;
+    height: 181px;
+    left: 290px;
+    top: 339px;
+
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 32px;
+    line-height: 185.52%;
+    text-align: center;
+    color: #FF996D;
+}
+
+
+
+
+
+.right-background {
+    position: absolute;
+    width: 1230px;
+    height: 760px;
+    left: 290px;
+    top: 0px;
+
+    background: #D3E4E3;
+}
+
+.left-bar {
+    position: absolute;
+    width: 290px;
+    height: 760px;
+    left: 0px;
+    top: 0px;
+
+    background: #F3E0B5;
+}
+
+.sign-in {
+    position: absolute;
+    width: 107px;
+    height: 64px;
+    left: 92px;
+    top: 126px;
+}
+
+
+.feed {
+    position: absolute;
+    width: 107px;
+    height: 64px;
+    left: -20px;
+    top: 200px;
+}
+
+.chats {
+    position: absolute;
+    width: 107px;
+    height: 64px;
+    left: 90px;
+    top: 210px;
+}
+
+.forum {
+    position: absolute;
+    width: 131px;
+    height: 64px;
+    left: -25px;
+    top: 290px;
+}
+
+.therapist {
+    position: absolute;
+    width: 181px;
+    height: 64px;
+    left: 60px;
+    top: 308px;
+}
+
+.setting_image {
+    background-image: url(../image/WechatIMG217.jpeg);
+}
+
+.set-image {
+    left: -63px;
+    top: 360px;
+    position: absolute;
+}
+
+.penn {
+    background-image: url(../image/UniversityofPennsylvania_FullLogo_RGB.jpg);
+}
+
+.penn-image {
+    left: 82px;
+    top: 700px;
+    position: absolute;
+}
+
+@keyframes App-logo-spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
