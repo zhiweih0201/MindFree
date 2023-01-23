@@ -2,18 +2,18 @@ import React, { useState } from 'react';
 import { TextInput, PasswordInput, Button } from '@mantine/core';
 import '../styles/loginmodal.scss';
 import AuthService from '../services/auth-service'
-
 import { useNavigate } from "react-router-dom";
-
+import { useDispatch } from 'react-redux';
+import { storeUser } from '../redux/slices/authSlice';
 
 export default function LoginModal(props) {
 
+    const dispatch = useDispatch()
 
     const navigate = useNavigate();
     const [pennKey, setPennKey] = useState('');
     const [password, setPassword] = useState('');
     const [validationMessage, setValidationMessage] = useState('')
-
 
     function loadHomepage() {
         return navigate('/homepage')
@@ -25,6 +25,7 @@ export default function LoginModal(props) {
             password: password
         }).then((loginResponse) => {
             setValidationMessage("")
+            dispatch(storeUser(loginResponse.data))
             loadHomepage();
         }).catch((err) => {
             console.log(err)
