@@ -2,12 +2,20 @@ import React, { useState } from 'react';
 import { TextInput, PasswordInput, Button } from '@mantine/core';
 import '../styles/signupmodal.scss';
 import AuthService from '../services/auth-service';
+import { useNavigate } from "react-router-dom";
 
 export default function SignupModal(props) {
 
     const [pennKey, setPennKey] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
+    const [validationMessage, setValidationMessage] = useState('')
+    const navigate = useNavigate();
+
+    function loadLogin() {
+        return navigate('/')
+    }
+
 
     function signup() {
         new AuthService().signup({
@@ -15,8 +23,12 @@ export default function SignupModal(props) {
             password: password
         }).then((response)=> {
             console.log(response)
+            setValidationMessage("")
+            loadLogin()
         }).catch((err) => {
             console.log(err)
+            //TODO set this once you know what error you are sending exactly in what situations
+            //setValidationMessage(err)
         })
     }
 
