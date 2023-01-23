@@ -13,6 +13,10 @@ export default function SignupModal(props) {
         new AuthService().signup({
             username: pennKey,
             password: password
+        }).then((response)=> {
+            console.log(response)
+        }).catch((err) => {
+            console.log(err)
         })
     }
 

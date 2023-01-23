@@ -3,18 +3,29 @@ import { TextInput, PasswordInput, Button } from '@mantine/core';
 import '../styles/loginmodal.scss';
 import AuthService from '../services/auth-service'
 
+import { useNavigate } from "react-router-dom";
+
+
 export default function LoginModal(props) {
 
+
+    const navigate = useNavigate();
     const [pennKey, setPennKey] = useState('');
     const [password, setPassword] = useState('');
 
+    function loadHomepage() {
+        return navigate('/homepage')
+    }
 
     function login() {
         new AuthService().login({
             username: pennKey,
             password: password
+        }).then((response)=> {
+            loadHomepage();
+        }).catch((err) => {
+            console.log(err)
         })
-        
     }
 
     return (
