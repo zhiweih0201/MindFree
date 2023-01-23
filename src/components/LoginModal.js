@@ -12,6 +12,8 @@ export default function LoginModal(props) {
     const navigate = useNavigate();
     const [pennKey, setPennKey] = useState('');
     const [password, setPassword] = useState('');
+    const [validationMessage, setValidationMessage] = useState('')
+
 
     function loadHomepage() {
         return navigate('/homepage')
@@ -21,27 +23,30 @@ export default function LoginModal(props) {
         new AuthService().login({
             username: pennKey,
             password: password
-        }).then((response)=> {
+        }).then((loginResponse) => {
+            setValidationMessage("")
             loadHomepage();
         }).catch((err) => {
             console.log(err)
+            setValidationMessage(err.response.data)
         })
     }
 
     return (
         <div className='login-modal'>
+            <b>{validationMessage}</b>
             <div className='text-inputs'>
                 <TextInput
                     className='text-input'
                     placeholder='Enter your PennKey'
                     label='PennKey'
-                    onChange={(e)=>setPennKey(e.target.value)}
+                    onChange={(e) => setPennKey(e.target.value)}
                 />
                 <PasswordInput
                     className='text-input'
                     placeholder='Enter your Password'
                     label='Password'
-                    onChange={(e)=>setPassword(e.target.value)}
+                    onChange={(e) => setPassword(e.target.value)}
                 />
             </div>
             <Button onClick={login} className='signin-button' color=''>
