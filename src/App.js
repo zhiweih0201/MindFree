@@ -9,6 +9,7 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import HomePage from './pages/HomePage';
+import ProfilePage from './pages/ProfilePage';
 import { store } from './redux/store';
 // import './App.css';
 
@@ -25,6 +26,10 @@ const router = createBrowserRouter([
   {
     path: "/homepage",
     element: <HomePage />
+  },
+  {
+    path: "/profile",
+    element: <ProfilePage />
   }
 ]);
 
