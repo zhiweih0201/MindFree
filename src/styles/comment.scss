@@ -1,0 +1,12 @@
+.Comment {
+    display: flex;
+    justify-content: space-between;
+    border-top: 0.04em solid;
+    border-color: gray;
+    .comment-timestamp {
+        .timestamp {
+            color: gray;
+            font-size: 14px;
+        }
+    }
+}

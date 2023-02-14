@@ -2,6 +2,7 @@ import logo from './logo.svg';
 import React from "react";
 import LoginPage from './pages/LoginPage';
 import SignupPage from './pages/SignupPage';
+import FeedPage from './pages/FeedPage';
 import ReactDOM from "react-dom/client";
 import { Provider } from 'react-redux'
 import {
@@ -30,6 +31,10 @@ const router = createBrowserRouter([
   {
     path: "/profile",
     element: <ProfilePage />
+  },
+  {
+    path: "/feed",
+    element: <FeedPage />
   }
 ]);
 

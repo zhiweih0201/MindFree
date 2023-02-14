@@ -1,0 +1,42 @@
+@import './variables.scss';
+
+.Collapsible {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
+    border-style: solid;
+    border-radius: 0.25rem;
+    padding: 1rem;
+    box-shadow: 0px 0px 10px  $shadow;
+    border-color: $border;
+    :hover {
+        cursor: pointer;
+    }
+    .content-container {
+        display: flex;
+        flex-direction: column;
+        margin-top: 1rem;
+    }
+}
+
+.Collapsible__trigger {
+    display: flex;
+    .header {
+        display: flex;
+        justify-content: space-between;
+        .subject {
+            font-weight: bold;
+            font-size: 24px;
+        }
+        .timestamp {
+            color: gray;
+            font-size: 14px;
+        }
+    }
+}
+
+.Collapsible__trigger.is-open svg {
+    transform: rotate(180deg);
+    transition-duration: 1s;
+}

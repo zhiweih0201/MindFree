@@ -11,6 +11,12 @@ import image_setting from "../image/WechatIMG217.jpeg"
 
 export default function HomePage(props) {
 
+    const navigate = useNavigate();
+
+    function loadFeed() {
+      return navigate('/feed')
+    }
+
     return (
         <div className="Home">
         {/*<div style={{ backgroundImage:`url(${image})`, height:780, width:4000, left:1000, backgroundRepeat:"no-repeat", backgroundSize:"contain"}}> */}
@@ -36,7 +42,9 @@ export default function HomePage(props) {
           }}>
             Sign In
           </Button>
-          <Button className="feed" style={{
+          <Button className="feed" 
+            onClick={loadFeed}
+            style={{
             background: '#F3E0B5',
             color: '#FF996D',
             fontFamily: 'Inter',
