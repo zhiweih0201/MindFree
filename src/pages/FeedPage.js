@@ -13,6 +13,8 @@ export default function FeedPage(props) {
         {text: 'Cmon Rajiv is the best', timestamp: new Date('February 13, 2023 21:30:00-05:00'), likes: 10}, 
         {text: 'I have a midterm coming up and I am terrified', timestamp: new Date('February 13, 2023 21:30:00-05:00'), likes: 6}
     ];
+    const numLikes = 10;
+    const numComments = 4;
 
     return (
         <div className='Feed'>
@@ -21,6 +23,8 @@ export default function FeedPage(props) {
                 subject={subject}
                 post={post}
                 comments={comments}
+                num_likes={numLikes}
+                num_comments={numComments}
             />
         </div>
     );

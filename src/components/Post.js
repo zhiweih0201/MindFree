@@ -25,16 +25,16 @@ export default function Post(props) {
                     <div className='post'>
                         {post}
                     </div>
+                    <div className='likes-comments'>
+                        <p className='likes'>{`${num_likes} likes`}</p>
+                        <p className='comments'>{`${num_comments} comments`}</p>
+                    </div>
                 </div>
             }>
                 <div className='content-container'>
                     {comments.map((comment) => <Comment comment={comment.text} timestamp={comment.timestamp} likes={comment.likes}/>)}
                 </div>
             </Collapsible>
-            {/* <div className='header'>
-                <p className='subject'>{subject}</p>
-                <p className='timestamp'>{timestamp}</p>
-            </div> */}
         </div>
     );
 
