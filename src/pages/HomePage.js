@@ -40,7 +40,7 @@ export default function HomePage(props) {
           padding: 0,
           margin: 0
         }}>
-          Sign In
+          Log out
         </Button>
         <Button className="feed" style={{
           background: '#F3E0B5',
