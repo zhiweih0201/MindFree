@@ -18,7 +18,7 @@ import { useNavigate } from "react-router-dom";
 export default function TherapistPage(props) {
     const navigate = useNavigate();
 
-    return <div>
+    return <div className = 'background'>
         <div className='logo'>
             <img src={logo} width="200px" />
         </div>

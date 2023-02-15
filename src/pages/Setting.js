@@ -10,13 +10,16 @@ export default function Setting(props) {
     return (
         <Grid>
             <Grid.Col span={2}>
-                <div className='setting-background'>
-                    <div className='setting-title-container'>
-                        <p className='title'>Setting</p>
-                    </div>
-                    <SettingModal />
+                <div className = 'background'>
+                    <div className='setting-background'>
+                        <div className='setting-title-container'>
+                            <p className='title'>Setting</p>
+                        </div>
+                        <SettingModal />
                     
+                    </div>
                 </div>
+                
             </Grid.Col>
             <Grid.Col span={8}>
 
