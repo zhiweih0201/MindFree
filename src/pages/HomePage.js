@@ -112,7 +112,8 @@ export default function HomePage(props) {
         >
           Therapists
         </Button>
-        <Button> <img className="set-image" src={image_setting} alt="setting_image" width="53"
+        <Button onClick={()=> navigate('/setting')}
+        > <img className="set-image" src={image_setting} alt="setting_image" width="53"
           height="50" />
         </Button>
         <img
