@@ -17,6 +17,10 @@ export default function HomePage(props) {
     return navigate('/profile')
   }
 
+  function loadSetting() {
+    return navigate('/setting')
+  }
+
   return (
     <div className="Home">
       {/*<div style={{ backgroundImage:`url(${image})`, height:780, width:4000, left:1000, backgroundRepeat:"no-repeat", backgroundSize:"contain"}}> */}
@@ -95,7 +99,7 @@ export default function HomePage(props) {
           Therapists
         </Button>
         <Button> <img className="set-image" src={image_setting} alt="setting_image" width="53"
-          height="50" />
+          height="50" onClick={loadSetting}/>
         </Button>
         <img
           className="penn-image"
