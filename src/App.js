@@ -2,9 +2,6 @@ import logo from './logo.svg';
 import React from "react";
 import LoginPage from './pages/LoginPage';
 import SignupPage from './pages/SignupPage';
-import Setting from './pages/Setting';
-import GeneralSetting from './pages/GeneralSetting';
-import SegmentSetting from './pages/SegmentSetting';
 import ReactDOM from "react-dom/client";
 import { Provider } from 'react-redux'
 import {
@@ -34,6 +31,10 @@ const router = createBrowserRouter([
   {
     path: "/profile",
     element: <ProfilePage />
+  },
+  {
+    path: "/therapist",
+    element: <TherapistPage />
   }
 ]);
 
