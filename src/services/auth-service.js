@@ -18,6 +18,8 @@ class AuthService {
       return  axios.post(this.apiBaseUrl + '/signup', signupObject)
 
     }
+
+   
 }
 
 export default AuthService;

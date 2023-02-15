@@ -8,13 +8,22 @@ import { Route, Routes, useNavigate } from 'react-router-dom';
 import { Button } from '@mui/material';
 import image_penn from "../image/UniversityofPennsylvania_FullLogo_RGB.jpg"
 import image_setting from "../image/WechatIMG217.jpeg"
+import AuthService from '../services/auth-service'
+import { storeUser } from '../redux/slices/authSlice';
+import { useDispatch } from 'react-redux';
 
 export default function HomePage(props) {
-
+  const dispatch = useDispatch()
   const navigate = useNavigate();
   
   function loadProfile() {
     return navigate('/profile')
+  }
+
+  const logoutHandler = () => {
+      //AuthService.logout()
+      dispatch(storeUser(null))
+      navigate('/')
   }
 
   return (
@@ -39,7 +48,9 @@ export default function HomePage(props) {
           textTransform: 'none',
           padding: 0,
           margin: 0
-        }}>
+        }}
+        onClick={logoutHandler}
+        >
           Log out
         </Button>
         <Button className="feed" style={{
@@ -91,7 +102,9 @@ export default function HomePage(props) {
           textTransform: 'none',
           padding: 0,
           margin: 0
-        }}>
+        }}
+        onClick={()=> navigate('/therapist')}
+        >
           Therapists
         </Button>
         <Button> <img className="set-image" src={image_setting} alt="setting_image" width="53"

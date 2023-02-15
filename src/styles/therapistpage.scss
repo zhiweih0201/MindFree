@@ -1,0 +1,54 @@
+body{
+    background-color: #F3E0B5;
+    padding: 30px;
+}
+h1{
+    background-color: #DAEF9E;
+    padding: 10px 20px;
+    width: 300px;
+    border-radius: 10px;
+}
+.profile-list{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding: 10px;
+    img{
+        width: 100px;
+    }
+}
+fieldset{
+    border:none;
+    width: 400px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+    background-color: white;
+    padding: 2px;
+}
+input{
+    border: none;
+    padding: 5px;
+    width: 80%;
+ 
+}
+.logo{
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+.buttonRow{
+    padding: 20px;
+    display: flex;
+    gap: 10px;
+}
+button{
+    background-color: #FF996D;
+    padding: 10px;
+    color: white;
+}
+.alignRight{
+    display: flex;
+    justify-content: end;
+    padding: 20px;
+}

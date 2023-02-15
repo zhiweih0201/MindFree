@@ -10,6 +10,7 @@ import {
 } from "react-router-dom";
 import HomePage from './pages/HomePage';
 import ProfilePage from './pages/ProfilePage';
+import TherapistPage from './pages/TherapistPage';
 import { store } from './redux/store';
 // import './App.css';
 
@@ -30,15 +31,19 @@ const router = createBrowserRouter([
   {
     path: "/profile",
     element: <ProfilePage />
+  },
+  {
+    path: "/therapist",
+    element: <TherapistPage />
   }
 ]);
 
 function App() {
   return ReactDOM.createRoot(document.getElementById("root")).render(
     <Provider store={store}>
-      <React.StrictMode>
+   
         <RouterProvider router={router} />
-      </React.StrictMode>
+  
     </Provider>
   );
 

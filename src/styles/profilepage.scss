@@ -1,9 +1,9 @@
 .profile-background {
-    position: absolute;
-    width: 612px;
-    height: 760px;
-    left: 0px;
-    top: 0px;
+    //position: absolute;
+    //width: 612px;
+    height: 100vh;
+    //left: 0px;
+    //top: 0px;
     background-color: #EEE5D1;
     ;
 }
@@ -280,3 +280,135 @@
     /* identical to box height */
     color: #F3A770;
 }
+.wrapper{
+    background-image: url('../assets/newsBg.png');
+    background-size: cover;
+    padding: 25px;
+    h1{
+        color: #FF996D;
+    }
+}
+.news{
+  
+   
+ 
+    
+}
+.avatar{
+    background-image: url('../assets/avatar.png');
+    background-size: cover;
+    width: 30px;
+    height: 30px;
+}
+.avatar2{
+    background-image: url('../assets/flower.png');
+    background-size: cover;
+    width: 50px;
+    height: 50px;
+}
+.box{
+    border-radius: 15px;
+    margin-bottom: 20px;
+    color: #FF996D;
+    background-color: #F3E0B5;
+}
+.box-request{
+   
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    padding: 15px 0px;
+    
+    div{
+
+    }
+   
+}
+
+.box-post{
+    display: flex;
+    padding: 30px 20px;
+    
+    .left{
+        width: 13%;
+    }
+    .right{
+        width: 87%;
+        .button-row{
+            display: flex;
+            justify-content: space-evenly;
+            
+        }
+        input{
+            padding: 10px 5px;
+            background-color: peach; 
+            width: 90%;      
+            margin-bottom: 10px; 
+            border:none;
+            border-radius: 10px;
+        }
+    }
+}
+
+button{
+    border-radius: 10px;
+    background-color: #F3CD70;
+    color: #FF996D;
+    padding: 8px;
+    border: none;
+    display: flex;
+    
+    img{
+        margin-right: 5px;
+    }
+}
+
+.box-feed{
+    padding: 15px;
+    .grid{
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+    
+    }
+    .gridItem{
+        display: flex;
+        flex-direction: row;;
+        justify-content: space-evenly;
+        width: 100%;
+        gap: 5px;
+    }
+    .gridItem2{
+        justify-content: space-between;
+    }
+    .date{
+        font-size: 25px;
+        width: 50px;
+    }
+    .icon{
+        width: 50px;
+        height: 50px;
+
+        background-size: cover;
+        border-radius: 5px;;
+    }
+    .icon1{
+        background-image: url('../assets/icons.png');
+    }
+    .icon2{
+        background-image: url('../assets/icon.png');
+    }
+    .mess{
+        width: 200px;
+    }
+    .box{
+        width: 300px;
+        border-radius: 10px;
+        background-color: #F3CD70;
+        color: #FF996D;
+        padding: 8px;
+        border: none;
+
+    }
+}
+
