@@ -19,6 +19,13 @@ export default function HomePage(props) {
   function loadProfile() {
     return navigate('/profile')
   }
+  
+    const logoutHandler = () => {
+      //AuthService.logout()
+      dispatch(storeUser(null))
+      navigate('/')
+  }
+
 
   return (
     <div className="Home">
