@@ -31,9 +31,10 @@ export default function Post(props) {
                     </div>
                 </div>
             }>
+                {/* not impacting why we see the post 3 times... */}
                 <div className='content-container'>
                     {comments.map((comment) => <Comment comment={comment.text} timestamp={comment.timestamp} likes={comment.likes}/>)}
-                </div>
+                </div> 
             </Collapsible>
         </div>
     );

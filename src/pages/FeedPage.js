@@ -14,18 +14,19 @@ export default function FeedPage(props) {
         {text: 'I have a midterm coming up and I am terrified', timestamp: new Date('February 13, 2023 21:30:00-05:00'), likes: 6}
     ];
     const numLikes = 10;
-    const numComments = 4;
+    const numComments = 3;
 
     return (
-        <div className='Feed'>
+        <div className='Post'>
             <Post
                 timestamp={msToPostTime(Date.now() - timestamp)}
                 subject={subject}
                 post={post}
                 comments={comments}
                 num_likes={numLikes}
-                num_comments={numComments}
-            />
+                num_comments={comments.length}
+                >
+            </Post>
         </div>
     );
 
