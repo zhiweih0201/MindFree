@@ -20,6 +20,10 @@ export default function HomePage(props) {
     return navigate('/profile')
   }
 
+  function loadForums() {
+    return navigate('/forums')
+  }
+
   const logoutHandler = () => {
       //AuthService.logout()
       dispatch(storeUser(null))
@@ -89,7 +93,8 @@ export default function HomePage(props) {
           textTransform: 'none',
           padding: 0,
           margin: 0
-        }}>
+        }}
+        onClick={()=> navigate('/forums')}>
           Forums
         </Button>
         <Button className="therapist" style={{
