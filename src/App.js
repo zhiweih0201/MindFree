@@ -51,21 +51,16 @@ const router = createBrowserRouter([
   {
     path: "/general-setting",
     element: <GeneralSetting />
-  },
-  {
-    path: "/segment-setting",
-    element: <SegmentSetting />
   }
 ]);
 
 function App() {
-  return ReactDOM.createRoot(document.getElementById("root")).render(
-    <Provider store={store}>
+  return <Provider store={store}>
    
         <RouterProvider router={router} />
   
     </Provider>
-  );
+
 
 }
 

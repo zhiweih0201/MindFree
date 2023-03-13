@@ -18,10 +18,11 @@ export default function ProfilePage(props) {
         <Grid className='gridGroup'>
             <Grid.Col span={6}>
                 <div className='profile-background'>
+                    <ProfileModal  />
                     <div className='profile-title-container'>
                         <p className='title'>Personal Profile</p>
                     </div>
-                    <ProfileModal />
+                    
                     <div className='profile-photo'>
                         <img className='profilepic' src={profilepic} />
                     </div>
