@@ -14,6 +14,13 @@ import pic3 from '../assets/pic3.png';
 import pic4 from '../assets/pic4.png';
 
 export default function ProfilePage(props) {
+
+    const navigate = useNavigate();
+
+    function loadProfileOtherView() {
+        return navigate('/profileotherview')
+    }
+
     return (
         <Grid className='gridGroup'>
             <Grid.Col span={6}>
@@ -48,6 +55,9 @@ export default function ProfilePage(props) {
                         </Button>
                         <Button className='tag-button-3' variant="contained" style={{ backgroundColor: "#F3CD70" }}>
                             #Conseling
+                        </Button>
+                        <Button className='other-profile' variant="contained" style={{ backgroundColor: "#F3CD70" }} onClick={loadProfileOtherView}>
+                            Other View
                         </Button>
                     </div>
                     <div className='profile-topics'>
@@ -102,8 +112,6 @@ export default function ProfilePage(props) {
                             <button><img src={pic4} />Take Photo</button>
                         </div>
                         </div>
-
-                      
 
                     </div>
                     <div className="box box-feed">

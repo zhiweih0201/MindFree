@@ -3,6 +3,7 @@ import React from "react";
 import LoginPage from './pages/LoginPage';
 import SignupPage from './pages/SignupPage';
 import FeedPage from './pages/FeedPage';
+import Chat from './pages/Chat';
 import Setting from './pages/Setting';
 import GeneralSetting from './pages/GeneralSetting';
 import SegmentSetting from './pages/SegmentSetting';
@@ -14,6 +15,7 @@ import {
 } from "react-router-dom";
 import HomePage from './pages/HomePage';
 import ProfilePage from './pages/ProfilePage';
+import ProfileOtherView from './pages/ProfileOtherView';
 import TherapistPage from './pages/TherapistPage';
 import { store } from './redux/store';
 // import './App.css';
@@ -37,12 +39,20 @@ const router = createBrowserRouter([
     element: <ProfilePage />
   },
   {
+    path: "/profileotherview",
+    element: <ProfileOtherView />
+  },
+  {
     path: "/forums",
     element: <FeedPage />
   },
   {
     path: "/therapist",
     element: <TherapistPage />
+  },
+  {
+    path: "/chat",
+    element: <Chat />
   },
   {
     path: "/setting",

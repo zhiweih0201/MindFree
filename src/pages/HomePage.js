@@ -80,7 +80,8 @@ export default function HomePage(props) {
           textTransform: 'none',
           padding: 0,
           margin: 0
-        }}>
+        }}
+        onClick={()=> navigate('/chat')}>
           Chats
         </Button>
         <Button className="forum" style={{

@@ -17,7 +17,7 @@ export default function GeneralSetting(props) {
                 <div className='setting-title-container'>
                     <p className='title'>Setting</p>
                 </div>
-                <GeneralSettingModal />
+                
             </div>
 
         </div>
