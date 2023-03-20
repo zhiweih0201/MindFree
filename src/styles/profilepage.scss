@@ -38,7 +38,7 @@
 .profile-container {
     position: absolute;
     width: 407px;
-    height: 300px;
+    height: 400px;
     left: 99px;
     top: 200px;
 
@@ -102,7 +102,7 @@
 
 .school {
     position: absolute;
-    width: 58px;
+    //width: 58px;
     height: 19px;
     left: 20px;
     top: 75px;
@@ -118,7 +118,7 @@
 
 .major {
     position: absolute;
-    width: 58px;
+    //width: 58px;
     height: 19px;
     left: 20px;
     top: 110px;
@@ -413,3 +413,34 @@ button{
     }
 }
 
+.center{
+    text-align: center;
+
+}
+.peach{
+    color: #FF996D;
+}
+#profileForm{
+    width: 80%;
+
+    fieldset{
+        background-color: transparent;
+        padding: 2px 10px;
+        width: 300px;
+
+    }
+    .create-button{
+        background: #F3CD70;
+        max-width: 300px;
+        margin: 20px auto;
+        border-radius: 10px;
+        color: white;
+        text-transform: uppercase;
+        padding: 10px;
+
+    }
+    input{
+        width: 50%;
+        border-radius: 10px;
+    }
+}

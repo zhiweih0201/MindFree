@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import { Grid } from '@mantine/core';
 import { Route, Routes, useNavigate } from 'react-router-dom';
 import { Button } from '@mui/material';
@@ -12,15 +12,133 @@ import pic1 from '../assets/pic1.png';
 import pic2 from '../assets/pic2.png';
 import pic3 from '../assets/pic3.png';
 import pic4 from '../assets/pic4.png';
+import {connect} from "react-redux";
 
-export default function ProfilePage(props) {
+function ProfilePage({user}) {
+
+    const [postData, setPostData] = useState([]);
+    const [profileData, setProfileData] = useState(null);
+    const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
+        "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+    ];
+    const [inputValue, setInputValue] = useState("");
+    const navigate = useNavigate();
+
+    const [form, setForm] = useState({})
+    const [showForm, setShowForm] = useState(["none"])
+
+    function getPostData(){
+        fetch(`http://localhost:3000/api/post?id=${user.id}`)
+            .then(response => response.json())
+            .then(data => {
+                console.log("i got data",data.data)
+                setPostData(data.data)
+            })
+    }
+
+    function getProfileData(){
+        fetch(`http://localhost:3000/api/profile?id=${user.id}`)
+            .then(response => response.json())
+            .then(data => {
+                console.log("i got profile",data.data)
+                setProfileData(data.data)
+                setShowForm("block")
+            })
+    }
+
+
+
+    useEffect(()=>{
+        console.log("do i have user?", user, user._id)
+        if(user == undefined || user.alias == undefined){
+            navigate('/')
+
+        }
+
+        getPostData()
+        getProfileData()
+
+
+    },[])
+
+    const postHander = () => {
+
+        var timestamp = new Date().getTime();
+        const date = new Date(timestamp );
+
+        console.log("sending:", user._id,inputValue, `${date.getMonth()+1}/${date.getDate()}/${date.getFullYear()}`, timestamp)
+        fetch("http://localhost:3000/api/post", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                //'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            body: JSON.stringify({
+                id: user._id,
+                body: inputValue,
+                date: `${date.getMonth()+1}/${date.getDate()}/${date.getFullYear()}`,
+                timestamp: timestamp})
+        }).then(response => response.json())
+            .then(data=> {
+                console.log("sent", data);
+                setInputValue("")
+                getPostData()
+            })
+    }
+
+    const handleOnChange = e => {
+        setForm({
+            ...form,
+            [e.target.name]: e.target.value,
+        })
+    }
+
+    const handleSubmit = async e => {
+        e.preventDefault()
+
+        console.log("form data",  e.target.year.value)
+
+        try {
+
+            fetch("http://localhost:3000/api/profile", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    //'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: JSON.stringify({
+                    school: e.target.school.value,
+                    year:  e.target.year.value,
+                    major:  e.target.major.value,
+                    personalText: e.target.personalText.value
+                }
+                )
+            }).then(response => response.json())
+                .then(data=> {
+                    console.log("sent", data);
+                    setForm({})
+                    getProfileData()
+                })
+
+
+
+        } catch (error) {
+            console.log(error)
+            setForm({})
+        }
+    }
+
+
+
+
     return (
         <Grid className='gridGroup'>
             <Grid.Col span={6}>
                 <div className='profile-background'>
                     <ProfileModal  />
                     <div className='profile-title-container'>
-                        <p className='title'>Personal Profile</p>
+                        <p className='title'>Personal Profile  </p>
+
                     </div>
                     
                     <div className='profile-photo'>
@@ -30,14 +148,71 @@ export default function ProfilePage(props) {
                         <img className='flower' src={flower} />
                         <p className='follower'>Followers</p>
                         <p className='following'>Following</p>
-                        <p className='person'>Anonymous Flower</p>
-                        <p className='school'>School:</p>
-                        <p className='major'>Major/Concentration:</p>
-                        <p className='year'>Year of Study:</p>
-                        <p className='personal-text'>I dream to make the world a better place!</p>
-                        <Button className='profile-button' variant="contained" style={{ backgroundColor: "#FFCC4D" }}>
-                            My Profile
-                        </Button>
+                        
+                        {profileData != null?<>
+                            <p className='school'>School: {profileData.school}</p>
+                            <p className='major'>Major/Concentration: {profileData.major}</p>
+                            <p className='year'>Year of Study:  {profileData.year}</p>
+                            <p className='personal-text'> {profileData.personalText}</p>
+
+                        </> : <>
+                            <div style={{position:"absolute", bottom:"0px", display:showForm}} >
+                                <br/><br/><br/>
+                                <h2 className={"center peach"}>Please Complete Profile</h2>
+                                <form id={"profileForm"} method="post" onSubmit={handleSubmit}>
+                                    <fieldset>
+                                        <label className={"peach"} htmlFor="">School</label>
+                                        <input
+
+                                            type="text"
+                                            value={form.school}
+                                            name={"school"}
+                                            onChange={handleOnChange}
+                                        />
+                                    </fieldset>
+                                    <fieldset>
+                                        <label htmlFor="" className={"peach"}>Major</label>
+                                        <input
+
+                                            type="text"
+                                            value={form.major}
+                                            name={"major"}
+                                            onChange={handleOnChange}
+                                        />
+                                    </fieldset>
+                                    <fieldset>
+                                        <label htmlFor="" className={"peach"}>Year</label>
+                                        <input
+
+                                            type="text"
+                                            value={form.year}
+                                            name={"year"}
+                                            onChange={handleOnChange}
+                                        />
+                                    </fieldset>
+                                    <fieldset>
+                                        <label htmlFor="" className={"peach"}>Personal Text</label>
+                                        <input
+
+                                            type="text"
+                                            value={form.personalText}
+                                            name={"personalText"}
+                                            onChange={handleOnChange}
+                                        />
+                                    </fieldset>
+                                    <input type="hidden" name={"id"} value={user._id}/>
+                                    <fieldset>
+                                        <input className='create-button' type="submit" value={"create"}/>
+                                    </fieldset>
+                                </form>
+                            </div>
+
+                        </>}
+
+
+                        {/*<Button className='profile-button' variant="contained" style={{ backgroundColor: "#FFCC4D" }}>*/}
+                        {/*    My Profile*/}
+                        {/*</Button>*/}
                     </div>
                     <div className='profile-tags'>
                         <p className='tags'>Tags</p>
@@ -93,14 +268,15 @@ export default function ProfilePage(props) {
                         </div>
                         </div>
                         <div className='right'>
-                        <input type={"text"} placeholder="Tell your friends what you think..." />
+                        <input type={"text"} onChange={(e)=>setInputValue(e.target.value)} value={inputValue} placeholder="Tell your friends what you think..." />
                         <div className='button-row'>
+                            <button onClick={postHander}><img src={pic3} />Text</button>
                             <button>
                                 <img src={pic1} />
-                                Pictures</button>
-                            <button><img src={pic2} />Videos</button>
-                            <button><img src={pic3} />Schedule</button>
-                            <button><img src={pic4} />Take Photo</button>
+                                #CIS160</button>
+                            <button><img src={pic2} />#ECON101</button>
+
+                            <button><img src={pic4} />#Failing</button>
                         </div>
                         </div>
 
@@ -109,25 +285,22 @@ export default function ProfilePage(props) {
                     </div>
                     <div className="box box-feed">
                         <div className='grid'>
-                            <div className='gridItem'>
-                                <div className='date'>10<small>Sep</small></div>
-                                <div className="icon icon1"></div>
-                                <div className="mess">Wandered Around the city, the weather was so good...
-Be in a good mood!!!</div>
-                            </div>
-                            <div className='gridItem'>
-                                <div className='date'>15<small>Aug</small></div>
-                                <div className="icon icon2"></div>
-                                <div className="mess">Definitely fall in love with boba tea recently!!</div>
-                            </div>
-                            <div className='gridItem'>
-                                <div className='date'>05<small>May</small></div>
-                    
-                                <div className="box">
-                                CS160 has been so hard...
-DM if you wanna help out or have any TIPs! Thanks!
-                                </div>
-                            </div>
+
+                            {
+                                postData.length != 0 && postData.map((d,i)=>{
+
+                                    let monthIndex = parseInt(d.date.split("/")[0]) - 1;
+
+
+
+                                    return <div className='gridItem' key={i + "p"}>
+                                        <div className='date'>{d.date.split("/")[1]}
+                                            <small>{monthNames[monthIndex]}</small></div>
+                                        <div className="icon icon1"></div>
+                                        <div className="mess">{d.body}</div>
+                                    </div>
+                                })
+                            }
 
 
 
@@ -140,3 +313,10 @@ DM if you wanna help out or have any TIPs! Thanks!
         </Grid>
     );
 }
+
+function mapStateToProps(state) {
+    console.log("mstp:", state, state.auth)
+    return { user: state.auth.user}
+}
+
+export default connect(mapStateToProps)(ProfilePage)
