@@ -1,20 +1,20 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import Post from '../components/Post';
 import msToPostTime from '../utils/utilFunctions';
 import LeftNav from '../components/LeftNav'
-import banner from '../assets/mental_health.png';
-import penn from '../assets/penn_logo.png';
-import { Flex, Grid } from '@mantine/core';
-
 import '../styles/feedpage.scss';
-import image from "../image/WechatIMG215.jpeg";
-import { Route, Routes, useNavigate } from 'react-router-dom';
-import { Button } from '@mui/material';
-import image_penn from "../image/UniversityofPennsylvania_FullLogo_RGB.jpg"
-import image_setting from "../image/WechatIMG217.jpeg"
+import {getThread, createThread} from '../services/thread-service'
+import {createPost} from "../services/post-service";
+import {connect} from "react-redux";
 
-export default function FeedPage(props) {
+
+function FeedPage({user}) {
     //const dispatch = useDispatch()
+    const [feed, setFeed]= useState(null)
+    const [form, setForm] = useState({})
+    const [showForm, setShowForm] = useState(["none"])
+    const [showCreateForm , setShowCreateForm] = useState(false)
+
 
     // dummy data
     const timestamp = new Date('February 13, 2023 19:30:00-05:00');
@@ -28,9 +28,46 @@ export default function FeedPage(props) {
     const numLikes = 10;
     const numComments = 3;
 
+    useEffect(()=>{
+        getFeedData();
+    }, [])
+
+    useEffect(()=>{
+        console.log("feed?", feed)
+    }, [feed])
 
 
-    
+    const getFeedData = async () => {
+        const data = await getThread();
+        setFeed(data)
+
+    }
+
+    const createThreadHandler = async (e) => {
+        e.preventDefault()
+        console.log("sending", user._id,form.title, form.body)
+
+        const data = await createThread({
+            username: user.username,
+            userId: user._id,
+            title: form.title,
+            body: form.body,
+        })
+        if(data){
+            setShowCreateForm(false)
+            setForm({})
+            getFeedData();
+        }
+
+    }
+
+    const handleOnChange = e => {
+        setForm({
+            ...form,
+            [e.target.name]: e.target.value,
+        })
+    }
+
     //const logoutHandler = () => {
     //    //AuthService.logout()
     //    dispatch(storeUser(null))
@@ -39,18 +76,65 @@ export default function FeedPage(props) {
 
 
     return (
+
         <div className='Thread'>
             <LeftNav/>
-            <div className='right'>
-                <Post
-                    timestamp={msToPostTime(Date.now() - timestamp)}
-                    subject={subject}
-                    post={post}
-                    comments={comments}
-                    num_likes={numLikes}
-                    num_comments={comments.length}
-                    >
-                </Post>
+            <div className='right Feed'>
+                <div className="controls">
+                    <button onClick={()=> setShowCreateForm(true)}>Create Thread</button>
+                </div>
+                {showCreateForm ? <div className={"createForm"}>
+                    <div>
+                        <h2>Create Thread</h2>
+
+                        <form   method="post" onSubmit={createThreadHandler}>
+                        <fieldset>
+                            <label htmlFor="" className={"peach"}>Title</label>
+                            <input
+
+                                type="text"
+                                value={form.title}
+                                name={"title"}
+                                onChange={handleOnChange}
+                            />
+                        </fieldset>
+
+                        <fieldset>
+                            <label htmlFor="" className={"peach"}>Body</label>
+                            <input
+
+                                type="text"
+                                value={form.body}
+                                name={"body"}
+                                onChange={handleOnChange}
+                            />
+                        </fieldset>
+                            <fieldset className={"row"}>
+                                <input type="submit" value={"create"}/>
+                                <input type="button" onClick={()=>setShowCreateForm(false)} value={"close"}/>
+                            </fieldset>
+
+                    </form>
+                    </div>
+                </div> :""}
+                {
+                    feed && feed.map((f,i)=>{
+                        return <Post key={i} subject={f.title} timestamp={f.timestamp}
+                                     comments={f.comments}
+                                     num_likes={numLikes}
+                                     author={f.username}
+                                     num_comments={comments.length}>  {f.body}</Post>
+                    })
+                }
+                {/*<Post*/}
+                {/*    timestamp={timestamp}*/}
+                {/*    subject={subject}*/}
+                {/*    author={"test"}*/}
+                {/*    comments={comments}*/}
+                {/*    num_likes={numLikes}*/}
+                {/*    num_comments={comments.length}*/}
+                {/*    >{post}*/}
+                {/*</Post>*/}
             </div>
 
 
@@ -58,3 +142,27 @@ export default function FeedPage(props) {
     );
 
 }
+
+function mapStateToProps(state) {
+    console.log("mstp:", state, state.auth.user)
+
+    let temp =  {
+        _id: "641d0a1238cb3eb0ce4d608f",
+        alias: "whatever",
+        username: "artart",
+        password: "artart"
+    }
+
+    // let temp2 =  {
+    //     _id: "641d1b53ac43892fedd74493",
+    //     alias: "whatever2",
+    //     username: "shin",
+    //     password: "shin"
+    // }
+
+    return {
+        user: state.auth.user
+    }
+}
+
+export default connect(mapStateToProps)(FeedPage)

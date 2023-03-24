@@ -2,11 +2,8 @@
 
 const baseURL = "http://localhost:3000"
 export const getThread = async (userId) => {
-    const response = await fetch(`${baseURL}/api/thread?id=${userId}`)
+    const response = await fetch(`${baseURL}/api/thread`)
     const results = await response.json();
-    // console.log("get?",  results, typeof results)
-    // console.log("get?",  results.data, typeof [...results.data])
-
     return results.data
 }
 

@@ -1,14 +1,13 @@
 @import './variables.scss';
 
 .Collapsible {
-    margin-top: 1rem;
-    margin-bottom: 1rem;
-    margin-right: 1rem;
+
     border-style: solid;
     border-radius: 0.25rem;
     padding: 1rem;
     box-shadow: 0px 0px 10px  $shadow;
     border-color: $border;
+    background-color: aliceblue;
     :hover {
         cursor: pointer;
     }
@@ -20,10 +19,14 @@
 }
 
 .Collapsible__trigger {
-    display: flex;
+
     .header {
         display: flex;
         justify-content: space-between;
+        width: 100%;
+        p{
+            margin:0px;
+        }
         .subject {
             font-weight: bold;
             font-size: 24px;
@@ -35,8 +38,11 @@
     }
     .likes-comments {
         display: flex;
+        gap: 10px;
+
+        justify-content: flex-end;
         .comments {
-            margin-left: 2rem;
+
         }
     }
 }
