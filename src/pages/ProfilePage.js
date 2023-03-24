@@ -13,10 +13,12 @@ import pic2 from '../assets/pic2.png';
 import pic3 from '../assets/pic3.png';
 import pic4 from '../assets/pic4.png';
 import {connect} from "react-redux";
+import {createPost, getPost} from "../services/post-service";
+import {getProfile, createProfile} from "../services/profile-service";
 
 function ProfilePage({user}) {
 
-    const [postData, setPostData] = useState([]);
+    const [postData, setPostData] = useState(null);
     const [profileData, setProfileData] = useState(null);
     const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
         "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
@@ -27,69 +29,69 @@ function ProfilePage({user}) {
     const [form, setForm] = useState({})
     const [showForm, setShowForm] = useState(["none"])
 
-    function getPostData(){
-        fetch(`http://localhost:3000/api/post?id=${user._id}`)
-            .then(response => response.json())
-            .then(data => {
-                setPostData(data.data)
-            })
-    }
-
-    function getProfileData(){
-
-        fetch(`http://localhost:3000/api/profile?id=${user._id}`)
-            .then(response => response.json())
-            .then(data => {
-                console.log("i got profile data", data.data, Object.keys(data.data).length)
-
-                if(Object.keys(data.data).length !== 0){
-                    setProfileData(data.data)
-
-                } else {
-                    setShowForm("block")
-                }
-
-            })
-    }
-
-
-
     useEffect(()=>{
-        console.log("user props:", user, user._id)
+        console.log("do i have user?", user)
         if(user == undefined || user.alias == undefined){
-            console.log("i am redirecting")
             navigate('/')
 
         }
-
-
         getPostData()
         getProfileData()
-
-
     },[])
 
-    const postHander = () => {
+    const getPostData = async () => {
+        const data = await getPost(user._id);
+        setPostData(data)
 
-        var timestamp = new Date().getTime();
-        const date = new Date(timestamp );
-
-        fetch("http://localhost:3000/api/post", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                userId: user._id,
-                body: inputValue,
-                date: `${date.getMonth()+1}/${date.getDate()}/${date.getFullYear()}`,
-                timestamp: timestamp})
-        }).then(response => response.json())
-            .then(data=> {
-                setInputValue("")
-                getPostData()
-            })
     }
+
+    const getProfileData = async () =>{
+        const data = await getProfile(user._id);
+        setPostData(data)
+        if(data != null){
+            setShowForm("block")
+        }
+    }
+
+
+    const createPostHandler = async () => {
+
+        const timestamp = new Date().getTime();
+        const date = new Date(timestamp);
+
+        const data = await createPost({
+            userId: user._id,
+            body: inputValue,
+            date: `${date.getMonth()+1}/${date.getDate()}/${date.getFullYear()}`,
+            timestamp: timestamp
+        })
+        if(data){
+            setInputValue("")
+            getPostData()
+        }
+
+    }
+
+    const createProfileHandler = async e => {
+        e.preventDefault()
+
+
+        try {
+            const data = await createProfile({
+                userId: user._id,
+                year:  e.target.year.value,
+                major:  e.target.major.value,
+                personalText: e.target.personalText.value
+            })
+            setForm({})
+            getProfileData()
+
+        } catch (error) {
+            console.log(error)
+            setForm({})
+        }
+    }
+
 
     const handleOnChange = e => {
         setForm({
@@ -98,40 +100,6 @@ function ProfilePage({user}) {
         })
     }
 
-    const handleSubmit = async e => {
-        e.preventDefault()
-       
-        //console.log("form data",  e.target.year.value)
-
-        try {
-
-            fetch("http://localhost:3000/api/profile", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    //'Content-Type': 'application/x-www-form-urlencoded'
-                },
-                body: JSON.stringify({
-                    userId: user._id,
-                    year:  e.target.year.value,
-                    major:  e.target.major.value,
-                    personalText: e.target.personalText.value
-                }
-                )
-            }).then(response => response.json())
-                .then(data=> {
-                    console.log("sent", data);
-                    setForm({})
-                    getProfileData()
-                })
-
-
-
-        } catch (error) {
-            console.log(error)
-            setForm({})
-        }
-    }
 
 
 
@@ -161,7 +129,7 @@ function ProfilePage({user}) {
                                     <div style={{display:showForm}} >
                                         <br/><br/><br/>
                                         <h2 className={"center peach"}>Please Complete Profile</h2>
-                                        <form id={"profileForm"} method="post" onSubmit={handleSubmit}>
+                                        <form id={"profileForm"} method="post" onSubmit={createProfileHandler}>
 
                                             <fieldset>
                                                 <label htmlFor="" className={"peach"}>Major</label>
@@ -270,7 +238,7 @@ function ProfilePage({user}) {
                         <div className='right'>
                         <input type={"text"} onChange={(e)=>setInputValue(e.target.value)} value={inputValue} placeholder="Tell your friends what you think..." />
                         <div className='button-row'>
-                            <button onClick={postHander}><img src={pic3} />Text</button>
+                            <button onClick={createPostHandler}><img src={pic3} />Text</button>
                             <button>
                                 <img src={pic1} />
                                 #CIS160</button>
@@ -287,7 +255,7 @@ function ProfilePage({user}) {
                         <div className='grid'>
 
                             {
-                                postData.length != 0 && postData.map((d,i)=>{
+                                postData && postData.map((d,i)=>{
 
                                     let monthIndex = parseInt(d.date.split("/")[0]) - 1;
 
@@ -303,7 +271,7 @@ function ProfilePage({user}) {
                             }
 
                             {
-                                postData.length === 0 ? "No Posts": ""
+                                 postData == null ? "No Posts": ""
                             }
 
 
@@ -333,7 +301,9 @@ function mapStateToProps(state) {
         password: "shin"
     }
 
-    return { user: state.auth.user}
+    return {
+        user: temp2 //state.auth.user
+    }
 }
 
 export default connect(mapStateToProps)(ProfilePage)
