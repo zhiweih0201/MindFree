@@ -47,8 +47,9 @@ function ProfilePage({user}) {
 
     const getProfileData = async () =>{
         const data = await getProfile(user._id);
-        setPostData(data)
+        setProfileData(data)
         if(data != null){
+        } else {
             setShowForm("block")
         }
     }
