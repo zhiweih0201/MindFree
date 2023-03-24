@@ -23,10 +23,13 @@
     }
 
 }
-
+.profile-photo{
+    overflow: hidden;
+    width: 100%;
+}
 .profilepic {
 
-    width: 407px;
+    width: 100%;
     height: 128px;
 
 
@@ -459,6 +462,7 @@ button{
     width: 50%;
 }
 .profileBox{
+    overflow: hidden;
 
     display: flex;
     flex-direction: column;

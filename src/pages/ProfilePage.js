@@ -55,10 +55,13 @@ function ProfilePage({user}) {
 
 
     useEffect(()=>{
+        console.log("user props:", user, user._id)
         if(user == undefined || user.alias == undefined){
+            console.log("i am redirecting")
             navigate('/')
 
         }
+
 
         getPostData()
         getProfileData()
@@ -97,7 +100,7 @@ function ProfilePage({user}) {
 
     const handleSubmit = async e => {
         e.preventDefault()
-
+       
         //console.log("form data",  e.target.year.value)
 
         try {
@@ -314,7 +317,7 @@ function ProfilePage({user}) {
 }
 
 function mapStateToProps(state) {
-    console.log("mstp:", state, state.auth)
+    console.log("mstp:", state, state.auth.user)
 
     let temp =  {
         _id: "641d0a1238cb3eb0ce4d608f",
@@ -330,7 +333,7 @@ function mapStateToProps(state) {
         password: "shin"
     }
 
-    return { user: temp}
+    return { user: state.auth.user}
 }
 
 export default connect(mapStateToProps)(ProfilePage)
