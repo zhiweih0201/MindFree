@@ -28,28 +28,33 @@ function ProfilePage({user}) {
     const [showForm, setShowForm] = useState(["none"])
 
     function getPostData(){
-        fetch(`http://localhost:3000/api/post?id=${user.id}`)
+        fetch(`http://localhost:3000/api/post?id=${user._id}`)
             .then(response => response.json())
             .then(data => {
-                console.log("i got data",data.data)
                 setPostData(data.data)
             })
     }
 
     function getProfileData(){
-        fetch(`http://localhost:3000/api/profile?id=${user.id}`)
+
+        fetch(`http://localhost:3000/api/profile?id=${user._id}`)
             .then(response => response.json())
             .then(data => {
-                console.log("i got profile",data.data)
-                setProfileData(data.data)
-                setShowForm("block")
+                console.log("i got profile data", data.data, Object.keys(data.data).length)
+
+                if(Object.keys(data.data).length !== 0){
+                    setProfileData(data.data)
+
+                } else {
+                    setShowForm("block")
+                }
+
             })
     }
 
 
 
     useEffect(()=>{
-        console.log("do i have user?", user, user._id)
         if(user == undefined || user.alias == undefined){
             navigate('/')
 
@@ -66,21 +71,18 @@ function ProfilePage({user}) {
         var timestamp = new Date().getTime();
         const date = new Date(timestamp );
 
-        console.log("sending:", user._id,inputValue, `${date.getMonth()+1}/${date.getDate()}/${date.getFullYear()}`, timestamp)
         fetch("http://localhost:3000/api/post", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
-                //'Content-Type': 'application/x-www-form-urlencoded'
             },
             body: JSON.stringify({
-                id: user._id,
+                userId: user._id,
                 body: inputValue,
                 date: `${date.getMonth()+1}/${date.getDate()}/${date.getFullYear()}`,
                 timestamp: timestamp})
         }).then(response => response.json())
             .then(data=> {
-                console.log("sent", data);
                 setInputValue("")
                 getPostData()
             })
@@ -96,7 +98,7 @@ function ProfilePage({user}) {
     const handleSubmit = async e => {
         e.preventDefault()
 
-        console.log("form data",  e.target.year.value)
+        //console.log("form data",  e.target.year.value)
 
         try {
 
@@ -107,7 +109,7 @@ function ProfilePage({user}) {
                     //'Content-Type': 'application/x-www-form-urlencoded'
                 },
                 body: JSON.stringify({
-                    school: e.target.school.value,
+                    userId: user._id,
                     year:  e.target.year.value,
                     major:  e.target.major.value,
                     personalText: e.target.personalText.value
@@ -132,113 +134,108 @@ function ProfilePage({user}) {
 
 
     return (
-        <Grid className='gridGroup'>
-            <Grid.Col span={6}>
-                <div className='profile-background'>
+       <div className={"flex"}>
+                <div className='profile-background left'>
                     <ProfileModal  />
                     <div className='profile-title-container'>
                         <p className='title'>Personal Profile  </p>
 
                     </div>
-                    
-                    <div className='profile-photo'>
-                        <img className='profilepic' src={profilepic} />
-                    </div>
-                    <div className='profile-container'>
-                        <img className='flower' src={flower} />
-                        <p className='follower'>Followers</p>
-                        <p className='following'>Following</p>
-                        
-                        {profileData != null?<>
-                            <p className='school'>School: {profileData.school}</p>
-                            <p className='major'>Major/Concentration: {profileData.major}</p>
-                            <p className='year'>Year of Study:  {profileData.year}</p>
-                            <p className='personal-text'> {profileData.personalText}</p>
+                    <div className="profileBox">
+                        <div>
+                            <div className='profile-photo'>
+                                <img className='profilepic' src={profilepic} />
+                            </div>
+                            <div className='profile-container'>
+                                <img className='flower' src={flower} />
+                                {profileData != null?<>
+                                    <p className='school'>School: University of Pennsylvania</p>
+                                    <p className='major'>Major/Concentration: {profileData.major}</p>
+                                    <p className='year'>Year of Study:  {profileData.year}</p>
+                                    <p className='personal-text'> {profileData.personalText}</p>
 
-                        </> : <>
-                            <div style={{position:"absolute", bottom:"0px", display:showForm}} >
-                                <br/><br/><br/>
-                                <h2 className={"center peach"}>Please Complete Profile</h2>
-                                <form id={"profileForm"} method="post" onSubmit={handleSubmit}>
-                                    <fieldset>
-                                        <label className={"peach"} htmlFor="">School</label>
-                                        <input
+                                </> : <>
+                                    <div style={{display:showForm}} >
+                                        <br/><br/><br/>
+                                        <h2 className={"center peach"}>Please Complete Profile</h2>
+                                        <form id={"profileForm"} method="post" onSubmit={handleSubmit}>
 
-                                            type="text"
-                                            value={form.school}
-                                            name={"school"}
-                                            onChange={handleOnChange}
-                                        />
-                                    </fieldset>
-                                    <fieldset>
-                                        <label htmlFor="" className={"peach"}>Major</label>
-                                        <input
+                                            <fieldset>
+                                                <label htmlFor="" className={"peach"}>Major</label>
+                                                <input
 
-                                            type="text"
-                                            value={form.major}
-                                            name={"major"}
-                                            onChange={handleOnChange}
-                                        />
-                                    </fieldset>
-                                    <fieldset>
-                                        <label htmlFor="" className={"peach"}>Year</label>
-                                        <input
+                                                    type="text"
+                                                    value={form.major}
+                                                    name={"major"}
+                                                    onChange={handleOnChange}
+                                                />
+                                            </fieldset>
+                                            <fieldset>
+                                                <label htmlFor="" className={"peach"}>Year</label>
+                                                <input
 
-                                            type="text"
-                                            value={form.year}
-                                            name={"year"}
-                                            onChange={handleOnChange}
-                                        />
-                                    </fieldset>
-                                    <fieldset>
-                                        <label htmlFor="" className={"peach"}>Personal Text</label>
-                                        <input
+                                                    type="text"
+                                                    value={form.year}
+                                                    name={"year"}
+                                                    onChange={handleOnChange}
+                                                />
+                                            </fieldset>
+                                            <fieldset>
+                                                <label htmlFor="" className={"peach"}>Personal Text</label>
+                                                <input
 
-                                            type="text"
-                                            value={form.personalText}
-                                            name={"personalText"}
-                                            onChange={handleOnChange}
-                                        />
-                                    </fieldset>
-                                    <input type="hidden" name={"id"} value={user._id}/>
-                                    <fieldset>
-                                        <input className='create-button' type="submit" value={"create"}/>
-                                    </fieldset>
-                                </form>
+                                                    type="text"
+                                                    value={form.personalText}
+                                                    name={"personalText"}
+                                                    onChange={handleOnChange}
+                                                />
+                                            </fieldset>
+                                            <input type="hidden" name={"id"} value={user._id}/>
+                                            <fieldset>
+                                                <input className='create-button' type="submit" value={"create"}/>
+                                            </fieldset>
+                                        </form>
+                                    </div>
+
+                                </>}
+
+
+
+                            </div>
+                            <div className='profile-tags'>
+                                <p className='tags'>Tags</p>
+                                <Button className='tag-button-1' variant="contained" style={{ backgroundColor: "#F3CD70" }}>
+                                    #Mental Health
+                                </Button>
+                                <Button className='tag-button-2' variant="contained" style={{ backgroundColor: "#F3CD70" }}>
+                                    #CIS 160
+                                </Button>
+                                <Button className='tag-button-3' variant="contained" style={{ backgroundColor: "#F3CD70" }}>
+                                    #Conseling
+                                </Button>
                             </div>
 
-                        </>}
+                            <div className='profile-topics'>
+                                <p className='topics'>Topics</p>
+                                <img className='computer' src={computer} />
+                                <img className='technology' src={technology} />
+                                <p className='computer-text'>CS Course Forum</p>
+                                <p className='computer-friends'>30 your friends are in</p>
+                                <p className='technology-text'>Mental Conseling Forum</p>
+                                <p className='technology-friends'>20 your friends are in</p>
+                            </div>
+                        </div>
 
 
-                        {/*<Button className='profile-button' variant="contained" style={{ backgroundColor: "#FFCC4D" }}>*/}
-                        {/*    My Profile*/}
-                        {/*</Button>*/}
+
                     </div>
-                    <div className='profile-tags'>
-                        <p className='tags'>Tags</p>
-                        <Button className='tag-button-1' variant="contained" style={{ backgroundColor: "#F3CD70" }}>
-                            #Mental Health
-                        </Button>
-                        <Button className='tag-button-2' variant="contained" style={{ backgroundColor: "#F3CD70" }}>
-                            #CIS 160
-                        </Button>
-                        <Button className='tag-button-3' variant="contained" style={{ backgroundColor: "#F3CD70" }}>
-                            #Conseling
-                        </Button>
+
+
+
                     </div>
-                    <div className='profile-topics'>
-                        <p className='topics'>Topics</p>
-                        <img className='computer' src={computer} />
-                        <img className='technology' src={technology} />
-                        <p className='computer-text'>CS Course Forum</p>
-                        <p className='computer-friends'>30 your friends are in</p>
-                        <p className='technology-text'>Mental Conseling Forum</p>
-                        <p className='technology-friends'>20 your friends are in</p>
-                    </div>
-                </div>
-            </Grid.Col>
-            <Grid.Col span={6}>
-                <div className='wrapper'>
+
+
+                <div className='right wrapper'>
                 <div className='news'>
                     <h1>News</h1>
                     <div className="box box-request">
@@ -302,21 +299,38 @@ function ProfilePage({user}) {
                                 })
                             }
 
+                            {
+                                postData.length === 0 ? "No Posts": ""
+                            }
 
 
                         </div>
                     </div>
                 </div>
                 </div>
-                </Grid.Col>
-            
-        </Grid>
+       </div>
+
     );
 }
 
 function mapStateToProps(state) {
     console.log("mstp:", state, state.auth)
-    return { user: state.auth.user}
+
+    let temp =  {
+        _id: "641d0a1238cb3eb0ce4d608f",
+        alias: "whatever",
+        username: "artart",
+        password: "artart"
+    }
+
+    let temp2 =  {
+        _id: "641d1b53ac43892fedd74493",
+        alias: "whatever2",
+        username: "shin",
+        password: "shin"
+    }
+
+    return { user: temp}
 }
 
 export default connect(mapStateToProps)(ProfilePage)

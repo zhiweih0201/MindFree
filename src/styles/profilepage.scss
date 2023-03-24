@@ -1,18 +1,13 @@
 .profile-background {
-    //position: absolute;
-    //width: 612px;
-    height: 100vh;
-    //left: 0px;
-    //top: 0px;
     background-color: #EEE5D1;
     
 }
 
 .profile-title-container {
-    padding-left: 2rem;
+
     padding-right: 4rem;
     //position: absolute;
-    //top: 10%;
+    //
     //-ms-transform: translateY(-50%);
     //transform: translateY(-50%);
 
@@ -21,45 +16,50 @@
         text-align: center;
         color: #FF996D;
         font-weight: 800;
-        margin-top:0px;
+        padding: 0px;
+        margin: 0px;
+        margin-bottom: 30px;
+
     }
 
 }
 
 .profilepic {
-    position: absolute;
+
     width: 407px;
     height: 128px;
-    left: 99px;
-    top: 120px;
+
+
 
 }
 
 .profile-container {
-    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     width: 407px;
     height: 400px;
-    left: 99px;
-    top: 200px;
+
 
     background: #F3E0B5;
 }
 
 .flower {
-    position: absolute;
+
     width: 80px;
     height: 80px;
-    left: 160px;
-    top: -30px;
+
+
     border-radius: 15px;
 }
 
 .follower {
-    position: absolute;
+
     width: 65px;
     height: 17px;
-    left: 45px;
-    top: 15px;
+
+
 
     font-family: 'Inter';
     font-style: normal;
@@ -70,11 +70,11 @@
 }
 
 .following {
-    position: absolute;
+
     width: 65px;
     height: 17px;
-    left: 285px;
-    top: 15px;
+
+
 
     font-family: 'Inter';
     font-style: normal;
@@ -85,11 +85,11 @@
 }
 
 .person {
-    position: absolute;
+
     width: 183px;
     height: 34px;
-    left: 125px;
-    top: 40px;
+
+
 
     font-family: 'Inter';
     font-style: normal;
@@ -101,11 +101,11 @@
 }
 
 .school {
-    position: absolute;
+
     //width: 58px;
     height: 19px;
-    left: 20px;
-    top: 75px;
+
+
 
     font-family: 'Inter';
     font-style: normal;
@@ -117,11 +117,11 @@
 }
 
 .major {
-    position: absolute;
+
     //width: 58px;
     height: 19px;
-    left: 20px;
-    top: 110px;
+
+
 
     font-family: 'Inter';
     font-style: normal;
@@ -133,10 +133,10 @@
 }
 
 .year {
-    position: absolute;
+
     height: 19px;
-    left: 20px;
-    top: 145px;
+
+
 
     font-family: 'Inter';
     font-style: normal;
@@ -148,9 +148,9 @@
 }
 
 .personal-text {
-    position: absolute;
-    left: 40px;
-    top: 180px;
+
+
+
 
     font-family: 'Inter';
     font-style: normal;
@@ -162,30 +162,30 @@
 }
 
 .profile-button {
-    position: absolute;
+
     width: 297px;
     height: 50px;
-    left: 50px;
-    top: 230px;
+
+
 
     border-radius: 10px;
 }
 
 .tags {
-    position: absolute;
+
     font-weight: 600;
     font-size: 20px;
     color: #FF996D;
-    left: 51px;
-    top: 493px;
+
+
 }
 
 .topics {
-    left: 51px;
-    top: 580px;
+
+
 
     font-family: 'Inter';
-    position: absolute;
+
     font-style: normal;
     font-weight: 600;
     font-size: 20px;
@@ -195,43 +195,43 @@
 }
 
 .tag-button-1 {
-    left: 63px;
-    top: 510px;
+
+
     background: #F3CD70;
 }
 
 .tag-button-2 {
-    left: 110px;
-    top: 510px;
+
+
 }
 
 .tag-button-3 {
-    left: 170px;
-    top: 510px;
+
+
 }
 
 .computer {
-    position: absolute;
+
     width: 45px;
     height: 45px;
-    left: 51px;
-    top: 640px;
+
+
     border-radius: 15px;
 }
 
 .technology {
-    position: absolute;
+
     width: 45px;
     height: 45px;
-    left: 51px;
-    top: 700px;
+
+
     border-radius: 15px;
 }
 
 .computer-text {
-    position: absolute;
-    left: 117px;
-    top: 625px;
+
+
+
 
     font-family: 'Inter';
     font-style: normal;
@@ -243,9 +243,9 @@
 }
 
 .computer-friends {
-    position: absolute;
-    left: 124px;
-    top: 655px;
+
+
+
     font-family: 'Inter';
     font-style: normal;
     font-weight: 500;
@@ -256,9 +256,9 @@
 }
 
 .technology-text {
-    position: absolute;
-    left: 117px;
-    top: 685px;
+
+
+
 
     font-family: 'Inter';
     font-style: normal;
@@ -270,9 +270,9 @@
 }
 
 .technology-friends {
-    position: absolute;
-    left: 124px;
-    top: 715px;
+
+
+
     font-family: 'Inter';
     font-style: normal;
     font-weight: 500;
@@ -437,10 +437,31 @@ button{
         color: white;
         text-transform: uppercase;
         padding: 10px;
+        cursor: pointer;
 
     }
     input{
         width: 50%;
         border-radius: 10px;
     }
+}
+.flex{
+    display: flex;
+    flex-direction: row;
+}
+
+.left{
+    width: 50%;
+
+}
+
+.right{
+    width: 50%;
+}
+.profileBox{
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
 }

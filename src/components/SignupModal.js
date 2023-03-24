@@ -26,9 +26,9 @@ export default function SignupModal(props) {
             setValidationMessage("")
             loadLogin()
         }).catch((err) => {
-            console.log(err)
+            console.log("err",err.response.data.message)
             //TODO set this once you know what error you are sending exactly in what situations
-            //setValidationMessage(err)
+            setValidationMessage(err.response.data.message)
         })
     }
 
@@ -54,6 +54,7 @@ export default function SignupModal(props) {
                     onChange={(e)=>setConfirmPassword(e.target.value)}
                 />
             </div>
+            <span style={{color:"red"}}>{validationMessage}</span>
             <Button onClick={signup} className='signin-button' color=''>
                 Sign Up
             </Button>
