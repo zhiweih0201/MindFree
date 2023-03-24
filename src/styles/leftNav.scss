@@ -1,0 +1,178 @@
+.main-text {
+
+  width: 544px;
+  height: 135px;
+
+
+
+  font-family: 'Coiny';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 96px;
+  line-height: 194.52%;
+
+  text-align: center;
+  color: #FF996D;
+}
+
+.explain-text {
+
+  width: 765px;
+  height: 181px;
+
+
+
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 32px;
+  line-height: 185.52%;
+  text-align: center;
+  color: #FF996D;
+}
+
+
+
+
+
+.right-background {
+
+  width: 1230px;
+  height: 760px;
+
+
+
+  background: #D3E4E3;
+}
+
+.left-bar {
+
+  width: 290px;
+  height: 760px;
+
+
+
+  background: #F3E0B5;
+}
+
+.sign-in {
+
+  width: 107px;
+  height: 64px;
+
+
+}
+
+
+.feed {
+
+  width: 107px;
+  height: 64px;
+
+
+}
+
+.chats {
+
+  width: 107px;
+  height: 64px;
+
+
+}
+
+.forum {
+
+  width: 131px;
+  height: 64px;
+
+
+}
+
+.therapist {
+
+  width: 181px;
+  height: 64px;
+
+
+}
+
+.setting_image {
+  background-image: url(../image/WechatIMG217.jpeg);
+}
+
+.set-image {
+
+
+
+}
+
+.penn {
+  background-image: url(../image/UniversityofPennsylvania_FullLogo_RGB.jpg);
+}
+.penn-image{
+  max-width: 100px;
+}
+.set-image{
+  max-width: 50px;
+}
+
+
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+
+
+.leftNav{
+  display: flex;
+  flex-direction: column;
+  background-color: #F3E0B5;
+  width: 20%;
+  justify-content: space-between;
+  align-items: center;
+  height: 100vh;
+  button{
+    padding: 0px 20px !important;
+  }
+  button, .penn-image, .set-image{
+    position: relative;
+    width: auto;
+    height: auto;
+    left: 0;
+    top: 0;
+    /*
+    position: absolute;
+    width: 107px;
+    height: 64px;
+    left: 92px;
+    top: 126px;*/
+  }
+  .top{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding-top: 50px;
+    height: 70vh;
+    justify-content: center;
+    align-items: center;
+    > div{
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+  }
+  .bottom{
+    display: flex;
+    gap: 20px;
+    flex-direction: column;
+    padding-bottom: 30px;
+
+  }
+}

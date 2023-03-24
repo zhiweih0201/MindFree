@@ -1,0 +1,19 @@
+.Thread{
+  background-color: #FF996D;
+}
+
+
+.Thread {
+  display: flex;
+  .right{
+    width: 80%;
+  }
+}
+
+.Feed{
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px;
+
+}
