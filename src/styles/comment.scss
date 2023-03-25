@@ -1,12 +1,24 @@
 .Comment {
-    display: flex;
-    justify-content: space-between;
-    border-top: 0.04em solid;
-    border-color: gray;
+    border-top: solid .5px rgba(127,127,127,.5);
     .comment-timestamp {
         .timestamp {
             color: gray;
             font-size: 14px;
         }
+    }
+}
+
+
+.comment-text{
+    min-height: 50px;
+}
+.info-row{
+    width: 100%;
+    display: flex;
+    gap:10px;
+    justify-content: flex-end;
+    margin-bottom: 10px;
+    p{
+        margin:0px;
     }
 }

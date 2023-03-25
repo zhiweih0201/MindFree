@@ -33,7 +33,6 @@ function ProfilePage({user}) {
         console.log("do i have user?", user)
         if(user == undefined || user.alias == undefined){
             navigate('/')
-
         }
         getPostData()
         getProfileData()
@@ -303,7 +302,7 @@ function mapStateToProps(state) {
     }
 
     return {
-        user: temp2 //state.auth.user
+        user: state.auth.user
     }
 }
 

@@ -6,6 +6,7 @@ import '../styles/feedpage.scss';
 import {getThread, createThread} from '../services/thread-service'
 import {createPost} from "../services/post-service";
 import {connect} from "react-redux";
+import {useNavigate} from "react-router-dom";
 
 
 function FeedPage({user}) {
@@ -14,9 +15,18 @@ function FeedPage({user}) {
     const [form, setForm] = useState({})
     const [showForm, setShowForm] = useState(["none"])
     const [showCreateForm , setShowCreateForm] = useState(false)
+    const navigate = useNavigate();
+
+    useEffect(()=>{
+        if(user == undefined || user.alias == undefined){
+            navigate('/')
+        }
+        getFeedData();
+    }, [])
 
 
     // dummy data
+    /*
     const timestamp = new Date('February 13, 2023 19:30:00-05:00');
     const subject = 'CIS 160 sucks';
     const post = 'I hate 160. I hate 160. I hate 160. I hate 160. I hate 160. I hate 160. I hate 160. I hate 160. I hate 160. I hate 160. I hate 160. v v I hate 160. I hate 160. I hate 160. I hate 160. I hate 160. I hate 160. I hate 160. I hate 160. I hate 160.';
@@ -25,20 +35,16 @@ function FeedPage({user}) {
         {text: 'Cmon Rajiv is the best', timestamp: new Date('February 13, 2023 21:30:00-05:00'), likes: 10}, 
         {text: 'I have a midterm coming up and I am terrified', timestamp: new Date('February 13, 2023 21:30:00-05:00'), likes: 6}
     ];
-    const numLikes = 10;
+
     const numComments = 3;
+*/
+    const numLikes = 10;
 
-    useEffect(()=>{
-        getFeedData();
-    }, [])
-
-    useEffect(()=>{
-        console.log("feed?", feed)
-    }, [feed])
 
 
     const getFeedData = async () => {
         const data = await getThread();
+        console.log("feeddata", data, data.id)
         setFeed(data)
 
     }
@@ -68,11 +74,7 @@ function FeedPage({user}) {
         })
     }
 
-    //const logoutHandler = () => {
-    //    //AuthService.logout()
-    //    dispatch(storeUser(null))
-    //    navigate('/')
-    //}
+
 
 
     return (
@@ -87,7 +89,7 @@ function FeedPage({user}) {
                     <div>
                         <h2>Create Thread</h2>
 
-                        <form   method="post" onSubmit={createThreadHandler}>
+                        <form method="post" onSubmit={createThreadHandler}>
                         <fieldset>
                             <label htmlFor="" className={"peach"}>Title</label>
                             <input
@@ -102,7 +104,6 @@ function FeedPage({user}) {
                         <fieldset>
                             <label htmlFor="" className={"peach"}>Body</label>
                             <input
-
                                 type="text"
                                 value={form.body}
                                 name={"body"}
@@ -119,14 +120,16 @@ function FeedPage({user}) {
                 </div> :""}
                 {
                     feed && feed.map((f,i)=>{
-                        return <Post key={i} subject={f.title} timestamp={f.timestamp}
+                        return <Post key={f._id} subject={f.title} timestamp={f.timestamp}
+                                     threadId={f._id}
                                      comments={f.comments}
                                      num_likes={numLikes}
                                      author={f.username}
-                                     num_comments={comments.length}>  {f.body}</Post>
+                                   getFeedData={getFeedData}>  {f.body}</Post>
                     })
                 }
                 {/*<Post*/}
+                {/*    key={"whatsd"}*/}
                 {/*    timestamp={timestamp}*/}
                 {/*    subject={subject}*/}
                 {/*    author={"test"}*/}

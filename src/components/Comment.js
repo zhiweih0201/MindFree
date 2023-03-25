@@ -2,23 +2,27 @@ import React from 'react';
 import msToPostTime from '../utils/utilFunctions';
 import '../styles/comment.scss';
 
-export default function Comment(props) {
+export default function Comment({data}) {
 
     const {
-        comment,
+        body,
         timestamp,
-        likes
-    } = props;
+        likes,
+        username,
+        date,
+    } = data;
 
     return (
         <div className='Comment'>
             <div className='comment-timestamp'>
-                <p className='comment-text'>{comment}</p>
-                <p className='timestamp'>{msToPostTime(Date.now() - timestamp)}</p>
+                <p className='comment-text'>{body}</p>
+                <div className="info-row">
+                    <p className={"comment-author"}>from: {username}</p>
+                    <p className='timestamp'>{msToPostTime(Date.now() - timestamp, timestamp)}</p>
+                    <p className='likes'>{`${likes.length} likes`}</p>
+                </div>
             </div>
-            <div className='comment-likes'>
-                <p className='likes'>{`${likes} likes`}</p>
-            </div>
+
         </div>
     );
 }

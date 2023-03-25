@@ -88,3 +88,47 @@
     margin-top: 5px;
   }
 }
+
+.addCommentForm{
+
+  h2{
+    text-align: center;
+  }
+  fieldset{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    background-color: transparent;
+    width: auto;
+  }
+  fieldset.row{
+    flex-direction: row;
+    justify-content: right;
+  }
+  label {
+    small{
+      display: inline;
+      color: gray
+    }
+  }
+  input{
+    width: auto;
+    padding: 10px;
+    border-radius: 10px;
+  }
+  input[type=submit], input[type=button]{
+    background-color: #FF996D;
+    padding: 10px;
+    color: white;
+    cursor: pointer !important;
+    border-radius: 10px;
+    max-width: 100px;
+    margin-top: 10px;
+  }
+  small{
+    text-align: right;
+    display: block;
+    margin-top: 5px;
+  }
+
+}

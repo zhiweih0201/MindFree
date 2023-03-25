@@ -4,8 +4,11 @@ import image_penn from "../image/UniversityofPennsylvania_FullLogo_RGB.jpg";
 import React from "react";
 import {useNavigate} from "react-router-dom";
 import '../styles/leftNav.scss';
+import {useDispatch} from "react-redux";
+import {storeUser} from "../redux/slices/authSlice";
 export default function LeftNav(){
     const navigate = useNavigate();
+    const dispatch = useDispatch()
 
     function loadHomepage() {
         return navigate('/homepage')
@@ -18,12 +21,18 @@ export default function LeftNav(){
         return navigate('/profile')
     }
 
+    const logoutHandler = () => {
+       //AuthService.logout()
+       dispatch(storeUser(null))
+       navigate('/')
+    }
+
 
     return   <div className="leftNav">
         <div className="top">
             <div>
 
-        <Button className="sign-in" style={{
+        <Button className="sign-in" onClick={logoutHandler} style={{
             background: '#F3E0B5',
             color: '#FF996D',
             fontFamily: 'Inter',
@@ -33,10 +42,23 @@ export default function LeftNav(){
             textTransform: 'none',
             padding: 0,
             margin: 0
-        }} //onClick={logoutHandler}
+        }} //
         >
             Log Out
         </Button>
+                <Button className="chats" style={{
+                    background: '#F3E0B5',
+                    color: '#FF996D',
+                    fontFamily: 'Inter',
+                    fontStyle: 'normal',
+                    fontWeight: 600,
+                    fontSize: 26,
+                    textTransform: 'none',
+                    padding: 0,
+                    margin: 0
+                }} onClick={loadHomepage}>
+                    Home
+                </Button>
         <Button className="feed"
                 onClick={loadProfile}
                 style={{
@@ -52,19 +74,7 @@ export default function LeftNav(){
                 }} >
             Profile
         </Button>
-        <Button className="chats" style={{
-            background: '#F3E0B5',
-            color: '#FF996D',
-            fontFamily: 'Inter',
-            fontStyle: 'normal',
-            fontWeight: 600,
-            fontSize: 26,
-            textTransform: 'none',
-            padding: 0,
-            margin: 0
-        }} onClick={loadHomepage}>
-            Home
-        </Button>
+
         <Button className="forum" style={{
             background: '#F3E0B5',
             color: '#FF996D',
