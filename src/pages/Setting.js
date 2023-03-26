@@ -40,24 +40,24 @@ export default function Setting(props) {
                     <div className="round-box">
                     
                         <fieldset>
-                            <label>question ?</label>
+                            <label>Who can see your profile?</label>
                             <select>
-                                <option>option 1</option>
-                                <option>option 2</option>
+                                <option>Everyone</option>
+                                <option>Followers</option>
                             </select>
                         </fieldset>
                         <fieldset>
-                            <label>question ?</label>
+                            <label>Who can see your posts?</label>
                             <select>
-                                <option>option 1</option>
-                                <option>option 2</option>
+                                <option>Everyone</option>
+                                <option>Followers</option>
                             </select>
                         </fieldset>
                         <fieldset>
-                            <label>question ?</label>
+                            <label>Who can comment on your posts</label>
                             <select>
-                                <option>option 1</option>
-                                <option>option 2</option>
+                                <option>Everyone</option>
+                                <option>Followers</option>
                             </select>
                         </fieldset>
 
@@ -67,30 +67,24 @@ export default function Setting(props) {
 
 
 
-                    <h2>Notification</h2>
+                    <h2>Notifications</h2>
                     <div className="round-box">
                     
                         <fieldset>
-                            <label>question ?</label>
+                            <label>Notifications on updates and activities.</label>
                             <select>
-                                <option>option 1</option>
-                                <option>option 2</option>
+                                <option>On</option>
+                                <option>Off</option>
                             </select>
                         </fieldset>
                         <fieldset>
-                            <label>question ?</label>
+                            <label>Send weekly digest.</label>
                             <select>
-                                <option>option 1</option>
-                                <option>option 2</option>
+                                <option>On</option>
+                                <option>Off</option>
                             </select>
                         </fieldset>
-                        <fieldset>
-                            <label>question ?</label>
-                            <select>
-                                <option>option 1</option>
-                                <option>option 2</option>
-                            </select>
-                        </fieldset>
+
 
 
                     </div>
