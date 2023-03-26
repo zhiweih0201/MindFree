@@ -26,3 +26,43 @@
         font-weight: 800;
     }
 }
+.row{
+    display: flex;
+    height: 100vh;
+}
+.right fieldset {
+    border: none;
+    width: 400px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+    background-color: transparent;
+    padding: 2px;
+}
+
+.round-box{
+    background-color: #F3E0B5;
+    border:solid 1px #FF996D;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 30px;
+    margin-left: 30px;
+    margin-top: 10px;
+}
+.setting .left{
+    width: 30%;
+    background-color: lightblue; 
+}
+.setting .right{
+    width: 70%;
+    background-color: #F3EDDE;
+    padding: 20px;
+}
+
+h2{
+    color:#FF996D; 
+}
+.settingsBtn{
+    background-color: none;;
+    color: black;
+}
