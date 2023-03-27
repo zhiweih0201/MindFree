@@ -28,18 +28,18 @@ export default function SettingModal(props) {
 
     return (
         <div>
-            <div className='setting-modal'>
+            <div className=''>
                 <Button>
-                    <img className="rebutton" src={rebutton} alt="my image" onClick={loadHomepage} />
+                    <img className="" src={rebutton} alt="my image" onClick={loadHomepage} />
                 </Button>
             </div>
-            <div className='setting-options'>
-                <img className='generalimg' src={generalimg} />
-                <Button className='general-setting-button' variant="contained" style={{ backgroundColor: "#d0f2ed" }} onClick={loadGeneral}>
+            <div className=''>
+                <img className='' src={generalimg} />
+                <Button className='settingsBtn' variant="contained" style={{ backgroundColor: "#d0f2ed" }} onClick={loadGeneral}>
                     General Setting
-                </Button>
-                <img className='segmentimg' src={segmentimg} />
-                <Button className='segment-setting-button' variant="contained" style={{ backgroundColor: "#d0f2ed" }} onClick={loadSegment}>
+                </Button><br/>
+                <img className='' src={segmentimg} />
+                <Button className='settingsBtn' variant="contained" style={{ backgroundColor: "#d0f2ed" }} onClick={loadSegment}>
                     Segment Setting
                 </Button>
             </div>
