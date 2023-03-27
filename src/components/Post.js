@@ -18,6 +18,7 @@ function Post({data,  children, getFeedData, user}) {
         comments,
         username,
         userId,
+        likes,
         _id,
     } = data;
 
@@ -32,7 +33,7 @@ function Post({data,  children, getFeedData, user}) {
         })
         //setForm({body:""})
         setForm({})
-
+        getFeedData()
 
     }
 
@@ -76,11 +77,12 @@ function Post({data,  children, getFeedData, user}) {
                 </div>
             <div>
                 <div className='likes-comments'>
-                    <p>[Like]</p>
-                    {/*<p className='likes'>{`${num_likes} likes`}</p>*/}
+
+
                     <p className='comments'>{`${comments.length} comments`}</p>
                     {/*<AiFillHeart/>*/}
-                    <AiOutlineHeart/>
+                    <p className='likes'>{`${likes.length} likes `}<AiOutlineHeart/></p>
+
                     {username == user.username? <AiFillDelete onClick={deleteHandler}/> :""}
                 </div>
             </div>
