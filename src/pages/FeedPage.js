@@ -113,7 +113,7 @@ function FeedPage({user}) {
                                 onChange={handleOnChange}
                             />
                         </fieldset>
-                            <fieldset className={"row"}>
+                            <fieldset className={"buttonRow"}>
                                 <input type="submit" value={"create"}/>
                                 <input type="button" onClick={()=>setShowCreateForm(false)} value={"close"}/>
                             </fieldset>

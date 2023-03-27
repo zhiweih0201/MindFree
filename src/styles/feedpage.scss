@@ -53,14 +53,16 @@
   }
   fieldset{
     display: flex;
+    width: auto;
     flex-direction: column;
     gap: 5px;
     background-color: transparent;
     width: auto;
   }
-  fieldset.row{
+
+  fieldset.buttonRow{
     flex-direction: row;
-    justify-content: right;
+    justify-content: flex-end;
   }
   label {
     small{
@@ -90,7 +92,7 @@
 }
 
 .addCommentForm{
-
+  height: 150px;
   h2{
     text-align: center;
   }
@@ -101,10 +103,7 @@
     background-color: transparent;
     width: auto;
   }
-  fieldset.row{
-    flex-direction: row;
-    justify-content: right;
-  }
+
   label {
     small{
       display: inline;
@@ -131,4 +130,6 @@
     margin-top: 5px;
   }
 
+
 }
+
