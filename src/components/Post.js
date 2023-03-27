@@ -24,7 +24,10 @@ function Post({data,  children, getFeedData, user}) {
 
     const commentHandler = async (e) => {
         e.preventDefault()
-
+        if(form.body === undefined || form.body.trim() === ""){
+            console.log("Need body text")
+            return
+        }
         const data = await addComment({
             userId: user._id,
             username: user.username,
