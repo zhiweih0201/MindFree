@@ -3,21 +3,23 @@ import Collapsible from 'react-collapsible';
 import Comment from './Comment';
 import '../styles/feedpost.scss';
 import msToPostTime from "../utils/utilFunctions";
-import {addComment} from "../services/thread-service";
+import {addComment, deleteThread} from "../services/thread-service";
 import {connect} from "react-redux";
+import {AiFillDelete, AiFillHeart, AiOutlineHeart} from "react-icons/ai";
+import {IoIosArrowUp} from "react-icons/io";
 
-function Post(props) {
+function Post({data,  children, getFeedData, user}) {
     const [form, setForm] = useState({})
+    const [open, setOpen ] = useState(false)
+    //console.log("post",data)
     const { 
         timestamp, 
-        subject,
+        title,
         comments,
-        author,
-        children,
-        user,
-        threadId,
-        getFeedData
-    } = props;
+        username,
+        userId,
+        _id,
+    } = data;
 
     const commentHandler = async (e) => {
         e.preventDefault()
@@ -26,11 +28,27 @@ function Post(props) {
             userId: user._id,
             username: user.username,
             body:form.body,
-            threadId: threadId
+            threadId: _id
         })
         //setForm({body:""})
         setForm({})
-        getFeedData()
+
+
+    }
+
+    const deleteHandler = async (e) =>{
+        e.preventDefault()
+        const data = await deleteThread({
+            userid: user._id,
+            threadId: _id
+        })
+        console.log(data.deletedCount)
+        if(data.deletedCount > 0){
+            getFeedData()
+        } else {
+            console.log("delete fail")
+        }
+
 
     }
 
@@ -48,22 +66,25 @@ function Post(props) {
     //triggerDisabled={comments.length == 0 ? true : false}
     return (
         <>
-            <Collapsible trigger={
-                <div>
-                    <div className='header'>
-                        <p className='subject'>{subject} <small style={{fontSize: "14px"}}>by {author}</small></p>
-                        <p className='timestamp'>{msToPostTime(Date.now() - timestamp, timestamp)}</p>
-                    </div>
-                    <div className='post'>
-                        {children}
-                    </div>
-                    <div className='likes-comments'>
-                        <p>[Like]</p>
-                        {/*<p className='likes'>{`${num_likes} likes`}</p>*/}
-                        <p className='comments'>{`${comments.length} comments`}</p>
-                    </div>
+            <div className="postBox">
+                <div className='header' onClick={()=>setOpen(!open)}>
+                    <p className='subject'>{title} <small style={{fontSize: "14px"}}>by {username}</small></p>
+                    <p className='timestamp'>{msToPostTime(timestamp)}</p>
                 </div>
-            }>
+                <div className='post' onClick={()=>setOpen(!open)}>
+                    {children}
+                </div>
+            <div>
+                <div className='likes-comments'>
+                    <p>[Like]</p>
+                    {/*<p className='likes'>{`${num_likes} likes`}</p>*/}
+                    <p className='comments'>{`${comments.length} comments`}</p>
+                    {/*<AiFillHeart/>*/}
+                    <AiOutlineHeart/>
+                    {username == user.username? <AiFillDelete onClick={deleteHandler}/> :""}
+                </div>
+            </div>
+                    <Collapsible trigger={<></>} open={open}>
                 {/* not impacting why we see the post 3 times... */}
                 <div className='content-container'>
                     {comments.map((c) => <Comment data={c} />)}
@@ -85,6 +106,8 @@ function Post(props) {
                     </div>
                 </div>
             </Collapsible>
+            </div>
+
         </>
     );
 

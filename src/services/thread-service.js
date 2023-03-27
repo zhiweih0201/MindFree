@@ -30,3 +30,15 @@ export const addComment = async (data) => {
     const results = await response.json();
     return results.data
 }
+
+export const deleteThread = async (data) => {
+    const response = await fetch( `${baseURL}/api/thread/`, {
+        method: "DELETE",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data)
+    });
+    const results = await response.json();
+    return results.data
+}

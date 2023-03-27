@@ -7,6 +7,7 @@ import {getThread, createThread} from '../services/thread-service'
 import {createPost} from "../services/post-service";
 import {connect} from "react-redux";
 import {useNavigate} from "react-router-dom";
+import {BsFillPlusSquareFill} from "react-icons/bs";
 
 
 function FeedPage({user}) {
@@ -83,7 +84,9 @@ function FeedPage({user}) {
             <LeftNav/>
             <div className='right Feed'>
                 <div className="controls">
-                    <button onClick={()=> setShowCreateForm(true)}>Create Thread</button>
+
+                        <BsFillPlusSquareFill cursor={"pointer"} color={"#F3CD70"} fontSize={"40px"} onClick={()=> setShowCreateForm(true)}/>
+
                 </div>
                 {showCreateForm ? <div className={"createForm"}>
                     <div>
@@ -120,11 +123,8 @@ function FeedPage({user}) {
                 </div> :""}
                 {
                     feed && feed.map((f,i)=>{
-                        return <Post key={f._id} subject={f.title} timestamp={f.timestamp}
-                                     threadId={f._id}
-                                     comments={f.comments}
-                                     num_likes={numLikes}
-                                     author={f.username}
+                        return <Post key={f._id}
+                                     data={f}
                                    getFeedData={getFeedData}>  {f.body}</Post>
                     })
                 }

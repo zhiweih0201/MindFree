@@ -1,4 +1,6 @@
-export default function msToPostTime( ms , timestamp = null) {
+export default function msToPostTime( t) {
+    const timestamp = parseInt(t);
+    const ms = Date.now() - timestamp
     let seconds = ms / 1000;
     const hours = parseInt( seconds / 3600 ); 
     seconds = seconds % 3600; 

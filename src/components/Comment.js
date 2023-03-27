@@ -18,7 +18,7 @@ export default function Comment({data}) {
                 <p className='comment-text'>{body}</p>
                 <div className="info-row">
                     <p className={"comment-author"}>from: {username}</p>
-                    <p className='timestamp'>{msToPostTime(Date.now() - timestamp, timestamp)}</p>
+                    <p className='timestamp'>{msToPostTime( timestamp)}</p>
                     <p className='likes'>{`${likes.length} likes`}</p>
                 </div>
             </div>
