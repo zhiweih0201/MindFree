@@ -1,11 +1,9 @@
 import React, {useEffect, useState} from 'react';
-import { Grid } from '@mantine/core';
+
 import { Route, Routes, useNavigate } from 'react-router-dom';
 import { Button } from '@mui/material';
 import '../styles/profilepage.scss';
 import ProfileModal from '../components/ProfileModal';
-import computer from '../assets/WechatIMG109.jpeg';
-import technology from '../assets/WechatIMG108.jpeg';
 import flower from '../assets/WechatIMG106.jpeg';
 import profilepic from '../assets/WechatIMG119.jpeg';
 import pic1 from '../assets/pic1.png';
@@ -14,12 +12,15 @@ import pic3 from '../assets/pic3.png';
 import pic4 from '../assets/pic4.png';
 import {connect} from "react-redux";
 import {createPost, getPost} from "../services/post-service";
-import {getProfile, createProfile} from "../services/profile-service";
+import {getProfile, createProfile, updateProfile} from "../services/profile-service";
+import {getThreadById} from "../services/thread-service";
+import {MdModeEditOutline} from "react-icons/md";
 
 function ProfilePage({user}) {
 
     const [postData, setPostData] = useState(null);
     const [profileData, setProfileData] = useState(null);
+    const [threadData, setThreadData] = useState(null)
     const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
         "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
     ];
@@ -27,7 +28,8 @@ function ProfilePage({user}) {
     const navigate = useNavigate();
 
     const [form, setForm] = useState({})
-    const [showForm, setShowForm] = useState(["none"])
+    const [showForm, setShowForm] = useState(false)
+    const [showEditForm, setShowEditForm] = useState(false);
 
     useEffect(()=>{
         console.log("do i have user?", user)
@@ -36,6 +38,7 @@ function ProfilePage({user}) {
         }
         getPostData()
         getProfileData()
+        getThreadbyIdData()
     },[])
 
     const getPostData = async () => {
@@ -44,12 +47,23 @@ function ProfilePage({user}) {
 
     }
 
+    const getThreadbyIdData = async () => {
+        const data = await getThreadById(user._id);
+        console.log("thread data", data)
+        setThreadData(data);
+    }
+
     const getProfileData = async () =>{
         const data = await getProfile(user._id);
         setProfileData(data)
         if(data != null){
+            setForm({
+                year:  data.year,
+                major:  data.major,
+                personalText: data.personalText
+            })
         } else {
-            setShowForm("block")
+            setShowForm(true)
         }
     }
 
@@ -74,16 +88,34 @@ function ProfilePage({user}) {
 
     const createProfileHandler = async e => {
         e.preventDefault()
-
+        console.log("check?", profileData._id)
 
         try {
-            const data = await createProfile({
-                userId: user._id,
-                year:  e.target.year.value,
-                major:  e.target.major.value,
-                personalText: e.target.personalText.value
-            })
-            setForm({})
+            if(profileData == undefined) {
+                const data = await createProfile({
+                    userId: user._id,
+                    year:  e.target.year.value,
+                    major:  e.target.major.value,
+                    personalText: e.target.personalText.value
+                })
+                setForm({})
+            } else {
+                console.log("updating")
+                const data = await updateProfile({
+                    profileId: profileData._id,
+                    userId: user._id,
+                    year:  e.target.year.value,
+                    major:  e.target.major.value,
+                    personalText: e.target.personalText.value
+                })
+                if(data){
+                    setShowForm(false)
+                    getProfileData()
+                }
+
+
+            }
+
             getProfileData()
 
         } catch (error) {
@@ -98,6 +130,13 @@ function ProfilePage({user}) {
             ...form,
             [e.target.name]: e.target.value,
         })
+    }
+
+    const editHandler = () => {
+        console.log("click")
+        //setShowEditForm(true)
+        setShowForm(true)
+
     }
 
 
@@ -116,18 +155,26 @@ function ProfilePage({user}) {
                         <div>
                             <div className='profile-photo'>
                                 <img className='profilepic' src={profilepic} />
+
+                            </div>
+                            <div className="profile-flower">
+                                <img className='flower' src={flower} />
                             </div>
                             <div className='profile-container'>
-                                <img className='flower' src={flower} />
-                                {profileData != null?<>
+
+                                {profileData != null && showForm == false ?<>
                                     <p className='school'>School: University of Pennsylvania</p>
                                     <p className='major'>Major/Concentration: {profileData.major}</p>
                                     <p className='year'>Year of Study:  {profileData.year}</p>
                                     <p className='personal-text'> {profileData.personalText}</p>
+                                    <p className={"edit"}>
+                                        <MdModeEditOutline color={"#FF996D"} cursor={"pointer"} onClick={editHandler}/>
+                                    </p>
 
-                                </> : <>
-                                    <div style={{display:showForm}} >
-                                        <br/><br/><br/>
+                                </> : ""}
+                                {
+                                    showForm ?  <div>
+                                        
                                         <h2 className={"center peach"}>Please Complete Profile</h2>
                                         <form id={"profileForm"} method="post" onSubmit={createProfileHandler}>
 
@@ -152,7 +199,7 @@ function ProfilePage({user}) {
                                                 />
                                             </fieldset>
                                             <fieldset>
-                                                <label htmlFor="" className={"peach"}>Personal Text</label>
+                                                <label htmlFor="" className={"peach"}>Status</label>
                                                 <input
 
                                                     type="text"
@@ -163,12 +210,13 @@ function ProfilePage({user}) {
                                             </fieldset>
                                             <input type="hidden" name={"id"} value={user._id}/>
                                             <fieldset>
-                                                <input className='create-button' type="submit" value={"create"}/>
+                                                <input className='create-button' type="submit" value={profileData?"edit": "create"}/>
                                             </fieldset>
                                         </form>
-                                    </div>
+                                    </div> : ""
+                                }
 
-                                </>}
+
 
 
 
@@ -188,10 +236,11 @@ function ProfilePage({user}) {
 
                             <div className='profile-topics'>
                                 <p className='topics'>Topics</p>
-                                <img className='computer' src={computer} />
-                                <img className='technology' src={technology} />
-                             
-                            
+                                {
+                                    threadData && threadData.map((t)=>{
+                                        return <p>{t.title}</p>
+                                    })
+                                }
                             </div>
                         </div>
 
@@ -283,7 +332,7 @@ function ProfilePage({user}) {
 }
 
 function mapStateToProps(state) {
-    console.log("mstp:", state, state.auth.user)
+    //console.log("mstp:", state, state.auth.user)
 
     let temp =  {
         _id: "641d0a1238cb3eb0ce4d608f",
@@ -300,7 +349,7 @@ function mapStateToProps(state) {
     }
 
     return {
-        user: state.auth.user
+        user: temp //state.auth.user
     }
 }
 

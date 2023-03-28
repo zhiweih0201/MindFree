@@ -16,3 +16,15 @@ export const createProfile = async (data) => {
     const results = await response.json();
     return results
 }
+
+export const updateProfile = async (data) => {
+    const response = await fetch( `${baseURL}/api/profile`, {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data)
+    });
+    const results = await response.json();
+    return results
+}

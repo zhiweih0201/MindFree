@@ -7,6 +7,13 @@ export const getThread = async (userId) => {
     return results.data
 }
 
+export const getThreadById = async (userId) => {
+    const response = await fetch(`${baseURL}/api/thread?userId=${userId}`)
+    const results = await response.json();
+    return results.data
+}
+
+
 export const createThread = async (data) => {
     const response = await fetch( `${baseURL}/api/thread`, {
         method: "POST",

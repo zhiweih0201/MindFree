@@ -48,44 +48,23 @@
     background: #F3E0B5;
 }
 
-.flower {
+.profile-flower{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #F3E0B5;
+    padding: 20px;
 
+}
+
+.flower {
     width: 80px;
     height: 80px;
-
-
     border-radius: 15px;
 }
 
-.follower {
-
-    width: 65px;
-    height: 17px;
 
 
-
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 600;
-    font-size: 14px;
-    line-height: 17px;
-    color: #FF996D;
-}
-
-.following {
-
-    width: 65px;
-    height: 17px;
-
-
-
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 600;
-    font-size: 14px;
-    line-height: 17px;
-    color: #FF996D;
-}
 
 .person {
 
@@ -468,4 +447,9 @@ button{
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
+    .edit{
+        width: 100%;
+        text-align: right;
+        padding-right: 30px;
+    }
 }
