@@ -190,10 +190,8 @@ function ProfilePage({user}) {
                                 <p className='topics'>Topics</p>
                                 <img className='computer' src={computer} />
                                 <img className='technology' src={technology} />
-                                <p className='computer-text'>CS Course Forum</p>
-                                <p className='computer-friends'>30 your friends are in</p>
-                                <p className='technology-text'>Mental Conseling Forum</p>
-                                <p className='technology-friends'>20 your friends are in</p>
+                             
+                            
                             </div>
                         </div>
 

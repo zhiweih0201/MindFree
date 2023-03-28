@@ -20,7 +20,7 @@ export default function Comment({data}) {
             <div className='comment-timestamp'>
                 <p className='comment-text'>{body}</p>
                 <div className="info-row">
-                    <p className={"comment-author"}>from: {username}</p>
+                    <p className={"comment-author"}></p>
 
                 </div>
             </div>

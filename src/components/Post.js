@@ -72,7 +72,7 @@ function Post({data,  children, getFeedData, user}) {
         <>
             <div className="postBox">
                 <div className='header' onClick={()=>setOpen(!open)}>
-                    <p className='subject'>{title} <small style={{fontSize: "14px"}}>by {username}</small></p>
+                    <p className='subject'>{title} <small style={{fontSize: "14px"}}></small></p>
                     <p className='timestamp'>{msToPostTime(timestamp)}</p>
                 </div>
                 <div className='post' onClick={()=>setOpen(!open)}>
@@ -82,7 +82,7 @@ function Post({data,  children, getFeedData, user}) {
                 <div className='likes-comments'>
 
 
-                    <p className='comments'>{`${comments.length} comments`}</p>
+                    <p className='comments' onClick={()=>setOpen(!open)}>{`${comments.length} comments`}</p>
                     {/*<AiFillHeart/>*/}
                     <p className='likes'>{`${likes.length} likes `}<AiOutlineHeart/></p>
 
