@@ -92,7 +92,7 @@ function Post({data,  children, getFeedData, user}) {
                     <Collapsible trigger={<></>} open={open}>
                 {/* not impacting why we see the post 3 times... */}
                 <div className='content-container'>
-                    {comments.map((c) => <Comment data={c} />)}
+                    {comments.map((c,i) => <Comment key={i + c.timestamp} getFeedData={getFeedData} data={c} threadId={_id} />)}
                     <hr/>
                     <div className={"addCommentForm"}>
                         <form action="" onSubmit={commentHandler}>

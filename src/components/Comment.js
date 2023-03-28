@@ -1,17 +1,38 @@
 import React from 'react';
 import msToPostTime from '../utils/utilFunctions';
 import '../styles/comment.scss';
+import {AiFillDelete, AiOutlineHeart} from "react-icons/ai";
+import {connect} from "react-redux";
+import {deleteComment} from "../services/thread-service";
 
-export default function Comment({data}) {
+function Comment({data, user, threadId , getFeedData}) {
 
     const {
         body,
         timestamp,
         likes,
         username,
-        date,
+        _id,
     } = data;
 
+    const deleteHandler =  async() => {
+
+        const data = await deleteComment({
+            userid: user._id,
+            threadId: threadId,
+            commentId: _id
+
+        })
+        console.log("results data",data)
+        if(data.modifiedCount > 0){
+            getFeedData()
+        } else {
+            console.log("comment delete fail")
+        }
+    }
+
+
+    console.log("comment data:",data)
     return (
         <div className='Comment'>
             <div className="header">
@@ -20,7 +41,10 @@ export default function Comment({data}) {
             <div className='comment-timestamp'>
                 <p className='comment-text'>{body}</p>
                 <div className="info-row">
-                    <p className={"comment-author"}></p>
+                    <p className='likes'>{`${likes.length} likes `}<AiOutlineHeart/></p>
+                    <p>
+                        {username == user.username? <AiFillDelete onClick={deleteHandler}/> :""}
+                    </p>
 
                 </div>
             </div>
@@ -28,3 +52,12 @@ export default function Comment({data}) {
         </div>
     );
 }
+
+
+function mapStateToProps(state) {
+    return {
+        user: state.auth.user
+    }
+}
+
+export default connect(mapStateToProps)(Comment)
