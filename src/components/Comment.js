@@ -1,9 +1,9 @@
 import React, {useState} from 'react';
 import msToPostTime from '../utils/utilFunctions';
 import '../styles/comment.scss';
-import {AiFillDelete, AiOutlineHeart} from "react-icons/ai";
+import {AiFillDelete, AiFillHeart, AiOutlineHeart} from "react-icons/ai";
 import {connect} from "react-redux";
-import {deleteComment, updateComment, updateThread} from "../services/thread-service";
+import {deleteComment, updateComment, updateCommentLike, updateLike, updateThread} from "../services/thread-service";
 import {MdModeEditOutline, MdOutlineCancelPresentation, MdSave} from "react-icons/md";
 
 function Comment({data, user, threadId , getFeedData}) {
@@ -63,6 +63,15 @@ function Comment({data, user, threadId , getFeedData}) {
         })
     }
 
+    const likeHandler = async () => {
+        const data = await updateCommentLike({
+            userId: user._id,
+            threadId: threadId,
+            commentId: _id,
+        })
+        getFeedData()
+    }
+
 
 
     return (
@@ -78,9 +87,12 @@ function Comment({data, user, threadId , getFeedData}) {
                 </p>
                 <div className="info-row">
 
-                    {`${likes.length} likes `}<AiOutlineHeart/>
+                    {`${likes.length} likes `}
 
-                        {username == user.username? <AiFillDelete onClick={deleteHandler}/> :""}
+                    {likes.includes(user._id) ? <AiFillHeart onClick={likeHandler}/>:     <AiOutlineHeart onClick={likeHandler}/>}
+
+
+                    {username == user.username? <AiFillDelete onClick={deleteHandler}/> :""}
 
                         {(username == user.username && !showEdit ) ?  <MdModeEditOutline  cursor={"pointer"} onClick={()=>setShowEdit(!showEdit)}/> : ""}
 

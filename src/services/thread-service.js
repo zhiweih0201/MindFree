@@ -98,3 +98,16 @@ export const updateLike = async (data) => {
     const results = await response.json();
     return results.data
 }
+
+
+export const updateCommentLike = async (data) => {
+    const response = await fetch( `${baseURL}/api/thread/comment/like`, {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data)
+    });
+    const results = await response.json();
+    return results.data
+}

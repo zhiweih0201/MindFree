@@ -86,7 +86,7 @@ function Post({data,  children, getFeedData, user}) {
 
     const likeHandler = async () => {
         const data = await updateLike({
-            userid: user._id,
+            userId: user._id,
             threadId: _id,
         })
         getFeedData()
@@ -130,7 +130,14 @@ function Post({data,  children, getFeedData, user}) {
 
                     <p className='comments' onClick={()=>setOpen(!open)}>{`${comments.length} comments`}</p>
                     {/*<AiFillHeart/>*/}
-                    <p className='likes'>{`${likes.length} likes `}<AiOutlineHeart onClick={likeHandler}/></p>
+                    <p className='likes'>{`${likes.length} likes `}
+
+                        {likes.includes(user._id) ? <AiFillHeart onClick={likeHandler}/>:     <AiOutlineHeart onClick={likeHandler}/>}
+
+
+
+
+                    </p>
 
                     {username == user.username? <><
                         AiFillDelete onClick={deleteHandler}/>
