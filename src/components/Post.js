@@ -3,24 +3,33 @@ import Collapsible from 'react-collapsible';
 import Comment from './Comment';
 import '../styles/feedpost.scss';
 import msToPostTime from "../utils/utilFunctions";
-import {addComment, deleteThread} from "../services/thread-service";
+import {addComment, deleteThread, updateLike, updateThread} from "../services/thread-service";
 import {connect} from "react-redux";
 import {AiFillDelete, AiFillHeart, AiOutlineHeart} from "react-icons/ai";
 import {IoIosArrowUp} from "react-icons/io";
+import {MdModeEditOutline, MdOutlineCancelPresentation, MdSave} from "react-icons/md";
 
 function Post({data,  children, getFeedData, user}) {
-    const [form, setForm] = useState({})
-    const [open, setOpen ] = useState(false)
-    //console.log("post",data)
-    const { 
-        timestamp, 
+    const {
+        timestamp,
         title,
         comments,
         username,
         userId,
+        body,
         likes,
         _id,
     } = data;
+    const [form, setForm] = useState({})
+    const [editForm, setEditForm] = useState({
+        title: title,
+        body: body
+    })
+    const [showEdit, setShowEdit] = useState(false)
+
+    const [open, setOpen ] = useState(false)
+    //console.log("post",data)
+
 
     const commentHandler = async (e) => {
         e.preventDefault()
@@ -56,10 +65,43 @@ function Post({data,  children, getFeedData, user}) {
 
     }
 
+    const editHandler = async (e) =>{
+        e.preventDefault()
+        const data = await updateThread({
+            userid: user._id,
+            threadId: _id,
+            title: editForm.title,
+            body: editForm.body,
+        })
+        console.log("edit update",data)
+        if(data.acknowledged){
+            getFeedData()
+            setShowEdit(false)
+        } else {
+            console.log("update fail")
+        }
+
+
+    }
+
+    const likeHandler = async () => {
+        const data = await updateLike({
+            userid: user._id,
+            threadId: _id,
+        })
+        getFeedData()
+    }
 
     const handleOnChange = e => {
         setForm({
             ...form,
+            [e.target.name]: e.target.value,
+        })
+    }
+
+    const handleEditOnChange = e => {
+        setEditForm({
+            ...editForm,
             [e.target.name]: e.target.value,
         })
     }
@@ -71,12 +113,16 @@ function Post({data,  children, getFeedData, user}) {
     return (
         <>
             <div className="postBox">
-                <div className='header' onClick={()=>setOpen(!open)}>
-                    <p className='subject'>{title} <small style={{fontSize: "14px"}}></small></p>
+                <div className='header' >
+                    {
+                        showEdit ?
+                            <input type="text" name={"title"} onChange={handleEditOnChange} value={editForm.title}/> : <p className='subject'>{title} <small style={{fontSize: "14px"}}></small></p>
+                    }
+
                     <p className='timestamp'>{msToPostTime(timestamp)}</p>
                 </div>
-                <div className='post' onClick={()=>setOpen(!open)}>
-                    {children}
+                <div className='post' >
+                    {showEdit ?  <input type="text" name={"body"} onChange={handleEditOnChange} value={editForm.body}/> : <>{body}</>}
                 </div>
             <div>
                 <div className='likes-comments'>
@@ -84,9 +130,20 @@ function Post({data,  children, getFeedData, user}) {
 
                     <p className='comments' onClick={()=>setOpen(!open)}>{`${comments.length} comments`}</p>
                     {/*<AiFillHeart/>*/}
-                    <p className='likes'>{`${likes.length} likes `}<AiOutlineHeart/></p>
+                    <p className='likes'>{`${likes.length} likes `}<AiOutlineHeart onClick={likeHandler}/></p>
 
-                    {username == user.username? <AiFillDelete onClick={deleteHandler}/> :""}
+                    {username == user.username? <><
+                        AiFillDelete onClick={deleteHandler}/>
+                       </>:""}
+
+                    {(username == user.username && !showEdit ) ?  <MdModeEditOutline  cursor={"pointer"} onClick={()=>setShowEdit(!showEdit)}/> : ""}
+
+
+                    {showEdit ? <><MdOutlineCancelPresentation onClick={()=>setShowEdit(!showEdit)}/>
+                        <MdSave onClick={editHandler} /></>: "" }
+
+
+
                 </div>
             </div>
                     <Collapsible trigger={<></>} open={open}>

@@ -61,3 +61,40 @@ export const deleteComment = async (data) => {
     const results = await response.json();
     return results.data
 }
+
+export const updateThread = async (data) => {
+    const response = await fetch( `${baseURL}/api/thread`, {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data)
+    });
+    const results = await response.json();
+    return results.data
+}
+
+export const updateComment = async (data) => {
+    const response = await fetch( `${baseURL}/api/thread/comment`, {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data)
+    });
+    const results = await response.json();
+    return results.data
+}
+
+
+export const updateLike = async (data) => {
+    const response = await fetch( `${baseURL}/api/thread/like`, {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data)
+    });
+    const results = await response.json();
+    return results.data
+}
