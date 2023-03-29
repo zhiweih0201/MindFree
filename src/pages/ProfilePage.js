@@ -275,7 +275,7 @@ function ProfilePage({user}) {
                     </div>
                 </div>
                 <div className='post'>
-                    <h1>Post</h1>
+                    <h1>Diary</h1>
                     <div className="box box-post">
                         <div className='left'>
                         <div className='avatar2'>
@@ -285,7 +285,7 @@ function ProfilePage({user}) {
                         <div className='right'>
                         <input type={"text"} onChange={(e)=>setInputValue(e.target.value)} value={inputValue} placeholder="Tell your friends what you think..." />
                         <div className='button-row'>
-                            <button onClick={createPostHandler}><img src={pic3} />Text</button>
+                            <button onClick={createPostHandler}><img src={pic3} />#Anxiety</button>
                             <button>
                                 <img src={pic1} />
                                 #CIS160</button>
