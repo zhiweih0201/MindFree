@@ -349,7 +349,7 @@ function mapStateToProps(state) {
     }
 
     return {
-        user: temp //state.auth.user
+        user: state.auth.user
     }
 }
 
