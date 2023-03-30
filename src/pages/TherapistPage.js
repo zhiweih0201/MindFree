@@ -213,7 +213,7 @@ export default function TherapistPage(props) {
         </div>
 
         <div className='alignRight'>
-            <button onClick={()=> navigate("/")}>Back to Home</button>
+            <button onClick={()=> navigate("/HomePage")}>Back to Home</button>
         </div>
 
 

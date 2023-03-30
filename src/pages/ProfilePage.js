@@ -283,7 +283,7 @@ function ProfilePage({user}) {
                         </div>
                         </div>
                         <div className='right'>
-                        <input type={"text"} onChange={(e)=>setInputValue(e.target.value)} value={inputValue} placeholder="Tell your friends what you think..." />
+                        <input type={"text"} onChange={(e)=>setInputValue(e.target.value)} value={inputValue} placeholder="Tell us what you think..." />
                         <div className='button-row'>
                             <button onClick={createPostHandler}><img src={pic3} />#Anxiety</button>
                             <button>
