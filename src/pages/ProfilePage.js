@@ -88,11 +88,10 @@ function ProfilePage({user}) {
 
     const createProfileHandler = async e => {
         e.preventDefault()
-        console.log("check?",profileData)
+        console.log("check?", profileData._id)
 
         try {
-
-            if(profileData == undefined || profileData === null) {
+            if(profileData == undefined) {
                 const data = await createProfile({
                     userId: user._id,
                     year:  e.target.year.value,
@@ -100,7 +99,6 @@ function ProfilePage({user}) {
                     personalText: e.target.personalText.value
                 })
                 setForm({})
-                setShowForm(false)
             } else {
                 console.log("updating")
                 const data = await updateProfile({
@@ -240,7 +238,7 @@ function ProfilePage({user}) {
                                 <p className='topics'>Topics</p>
                                 {
                                     threadData && threadData.map((t)=>{
-                                        return <p key={t.title}>{t.title}</p>
+                                        return <p>{t.title}</p>
                                     })
                                 }
                             </div>
