@@ -33,21 +33,21 @@ export default function Setting(props) {
                             <label>Who can see your profile?</label>
                             <select>
                                 <option>Everyone</option>
-                                <option>Followers</option>
+                                <option>Just me</option>
                             </select>
                         </fieldset>
                         <fieldset>
                             <label>Who can see your posts?</label>
                             <select>
                                 <option>Everyone</option>
-                                <option>Followers</option>
+                                <option>Just me</option>
                             </select>
                         </fieldset>
                         <fieldset>
                             <label>Who can comment on your posts</label>
                             <select>
                                 <option>Everyone</option>
-                                <option>Followers</option>
+                                <option>Just me</option>
                             </select>
                         </fieldset>
 
