@@ -1,6 +1,6 @@
 
 import logo from './logo.svg';
-import React from "react";
+import React, {useEffect} from "react";
 import LoginPage from './pages/LoginPage';
 import SignupPage from './pages/SignupPage';
 import FeedPage from './pages/FeedPage';
@@ -56,6 +56,11 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
+  useEffect(() => {
+    document.title = "MindFree"
+  }, []);
+
+
   return <Provider store={store}>
    
         <RouterProvider router={router} />

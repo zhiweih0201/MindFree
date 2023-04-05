@@ -46,6 +46,7 @@ function FeedPage({user}) {
             userId: user._id,
             title: form.title,
             body: form.body,
+            therapist: user?.therapist
         })
         if(data){
             setShowCreateForm(false)
@@ -115,16 +116,7 @@ function FeedPage({user}) {
                                    getFeedData={getFeedData}/>
                     })
                 }
-                {/*<Post*/}
-                {/*    key={"whatsd"}*/}
-                {/*    timestamp={timestamp}*/}
-                {/*    subject={subject}*/}
-                {/*    author={"test"}*/}
-                {/*    comments={comments}*/}
-                {/*    num_likes={numLikes}*/}
-                {/*    num_comments={comments.length}*/}
-                {/*    >{post}*/}
-                {/*</Post>*/}
+
             </div>
 
 

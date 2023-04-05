@@ -14,6 +14,7 @@ function Comment({data, user, threadId , getFeedData}) {
         likes,
         username,
         _id,
+        therapist
     } = data;
 
     const [editForm, setEditForm] = useState({
@@ -75,7 +76,7 @@ function Comment({data, user, threadId , getFeedData}) {
 
 
     return (
-        <div className='Comment'>
+        <div className={therapist?"Comment therapistComment":"Comment"}>
             <div className="header">
                 <p className='timestamp'>{msToPostTime( timestamp)}</p>
             </div>
@@ -86,7 +87,7 @@ function Comment({data, user, threadId , getFeedData}) {
 
                 </p>
                 <div className="info-row">
-
+                    {therapist?<span className={"therapistIcon"}><small>Therapist</small></span>: ""}
                     {`${likes.length} likes `}
 
                     {likes.includes(user._id) ? <AiFillHeart onClick={likeHandler}/>:     <AiOutlineHeart onClick={likeHandler}/>}

@@ -9,6 +9,7 @@ import {AiFillDelete, AiFillHeart, AiOutlineHeart} from "react-icons/ai";
 import {IoIosArrowUp} from "react-icons/io";
 import {MdModeEditOutline, MdOutlineCancelPresentation, MdSave} from "react-icons/md";
 import {BsFlag} from "react-icons/bs";
+import {ImProfile} from "react-icons/im";
 
 function Post({data,  children, getFeedData, user}) {
     const {
@@ -20,6 +21,7 @@ function Post({data,  children, getFeedData, user}) {
         body,
         likes,
         _id,
+        therapist
     } = data;
     const [form, setForm] = useState({})
     const [editForm, setEditForm] = useState({
@@ -42,7 +44,8 @@ function Post({data,  children, getFeedData, user}) {
             userId: user._id,
             username: user.username,
             body:form.body,
-            threadId: _id
+            threadId: _id,
+            therapist: user?.therapist
         })
         //setForm({body:""})
         setForm({})
@@ -113,39 +116,46 @@ function Post({data,  children, getFeedData, user}) {
     //triggerDisabled={comments.length == 0 ? true : false}
     return (
         <>
-            <div className="postBox">
-                <div className='header' >
-                    {
-                        showEdit ?
-                            <input type="text" name={"title"} onChange={handleEditOnChange} value={editForm.title}/> : <p className='subject'>{title} <small style={{fontSize: "14px"}}></small></p>
-                    }
+            <div className={therapist? "therapistPost postBox":"postBox"}>
+                <div className="headerContainer">
+                    <div className='header' >
+                        <p className='subject'>
+                        {
+                            showEdit ?
+                                <input type="text" name={"title"} onChange={handleEditOnChange} value={editForm.title}/> : <>{title} <small style={{fontSize: "14px"}}></small></>
+                        }
+                            {therapist?<span><small>Therapist</small></span>: ""}
+                        </p>
 
-                    <p className='timestamp'>{msToPostTime(timestamp)}</p>
+
+                        <p className='timestamp'>  {msToPostTime(timestamp)}</p>
+                    </div>
+                    <div className='post' >
+                        {showEdit ?  <input type="text" name={"body"} onChange={handleEditOnChange} value={editForm.body}/> : <>{body}</>}
+                    </div>
+
+                    <div>
+                    <div className='likes-comments'>
+                        <p className='comments' onClick={()=>setOpen(!open)}>{`${comments.length} comments`}</p>
+                        {/*<AiFillHeart/>*/}
+                        <p className='likes'>{`${likes.length} likes `}
+                            {likes.includes(user._id) ? <AiFillHeart onClick={likeHandler}/>:     <AiOutlineHeart onClick={likeHandler}/>}
+                        </p>
+                        <BsFlag ml={"5px"}/>
+                        {username == user.username? <><
+                            AiFillDelete onClick={deleteHandler}/>
+                           </>:""}
+                        {(username == user.username && !showEdit ) ?  <MdModeEditOutline  cursor={"pointer"} onClick={()=>setShowEdit(!showEdit)}/> : ""}
+                        {showEdit ? <><MdOutlineCancelPresentation onClick={()=>setShowEdit(!showEdit)}/>
+                            <MdSave onClick={editHandler} /></>: "" }
+                    </div>
                 </div>
-                <div className='post' >
-                    {showEdit ?  <input type="text" name={"body"} onChange={handleEditOnChange} value={editForm.body}/> : <>{body}</>}
                 </div>
-            <div>
-                <div className='likes-comments'>
-                    <p className='comments' onClick={()=>setOpen(!open)}>{`${comments.length} comments`}</p>
-                    {/*<AiFillHeart/>*/}
-                    <p className='likes'>{`${likes.length} likes `}
-                        {likes.includes(user._id) ? <AiFillHeart onClick={likeHandler}/>:     <AiOutlineHeart onClick={likeHandler}/>}
-                    </p>
-                    <BsFlag ml={"5px"}/>
-                    {username == user.username? <><
-                        AiFillDelete onClick={deleteHandler}/>
-                       </>:""}
-                    {(username == user.username && !showEdit ) ?  <MdModeEditOutline  cursor={"pointer"} onClick={()=>setShowEdit(!showEdit)}/> : ""}
-                    {showEdit ? <><MdOutlineCancelPresentation onClick={()=>setShowEdit(!showEdit)}/>
-                        <MdSave onClick={editHandler} /></>: "" }
-                </div>
-            </div>
                     <Collapsible trigger={<></>} open={open}>
                 {/* not impacting why we see the post 3 times... */}
                 <div className='content-container'>
                     {comments.map((c,i) => <Comment key={i + c.timestamp} getFeedData={getFeedData} data={c} threadId={_id} />)}
-                    <hr/>
+
                     <div className={"addCommentForm"}>
                         <form action="" onSubmit={commentHandler}>
                             <fieldset>
@@ -156,7 +166,7 @@ function Post({data,  children, getFeedData, user}) {
                                     onChange={handleOnChange}
                                 />
                             </fieldset>
-                            <fieldset className={"row"}>
+                            <fieldset className={"row alignRight"}>
                                 <input type="submit" value={"Add Comment"}/>
                             </fieldset>
                         </form>
