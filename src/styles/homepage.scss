@@ -1,33 +1,23 @@
 .main-text {
-    position: absolute;
-    width: 544px;
-    height: 135px;
-    top: 56px;
-    left: 400px;
 
+    text-align: center;
     font-family: 'Coiny';
     font-style: normal;
     font-weight: 400;
     font-size: 96px;
-    line-height: 194.52%;
 
-    text-align: center;
+
     color: #FF996D;
 }
 
 .explain-text {
-    position: absolute;
-    width: 765px;
-    height: 181px;
-    left: 290px;
-    top: 339px;
-
+    display: block;
+    text-align: center;
     font-family: 'Inter';
     font-style: normal;
     font-weight: 500;
     font-size: 32px;
-    line-height: 185.52%;
-    text-align: center;
+
     color: #FF996D;
 }
 
@@ -36,13 +26,13 @@
 
 
 .right-background {
-    position: absolute;
-    width: 1230px;
-    height: 760px;
-    left: 290px;
-    top: 0px;
-
     background: #D3E4E3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    > div{
+
+    }
 }
 
 .left-bar {
@@ -116,6 +106,12 @@
     position: absolute;
 }
 
+.Home {
+    display: flex;
+    .right{
+        width: 80%;
+    }
+}
 @keyframes App-logo-spin {
     from {
         transform: rotate(0deg);

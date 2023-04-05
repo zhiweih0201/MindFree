@@ -6,6 +6,7 @@ import { Grid } from '@mantine/core';
 import '../styles/setting.scss';
 import imgBg from '../image/WechatIMG215.jpeg'
 import rebutton from '../assets/icons8-return-48.png';
+import LeftNav from "../components/LeftNav";
 
 export default function Setting(props) {
 
@@ -16,26 +17,15 @@ export default function Setting(props) {
     }
 
 
-    return (<div className="row setting">
-                <div className="left" 
-                style={{
-                    
-              
-                    backgroundImage: "url(" + { imgBg } + ")"
-                
-                }}
-                
-                
-                >
-                     <Button>
-                    <img className="" src={rebutton} alt="my image" onClick={loadHomepage} />
-                </Button>
+    return (<div className="Settings">
 
-        
+
+                    <LeftNav/>
                    
                 
-                </div>
+
                 <div className='right'>
+                    <div>
                     <h2>Security</h2>
                     <div className="round-box">
                     
@@ -88,7 +78,7 @@ export default function Setting(props) {
 
 
                     </div>
-
+                    </div>
                 </div>
             </div>
     );

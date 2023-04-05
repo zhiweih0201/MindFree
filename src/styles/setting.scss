@@ -1,69 +1,47 @@
+
+
+.Settings {
+    display: flex;
+    .right{
+        width: 80%;
+        background-color: #EEE5D1;
+        padding: 20px;
+        justify-content: center;
+        display: flex;
+        > div{
+
+        }
+        h2{
+            color: rgb(255, 153, 109);
+        }
+        fieldset{
+            border:none;
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            justify-content: space-between;
+            select{
+                padding: 8px 10px;
+                background-color: rgb(255, 153, 109);
+                color: white;
+                border: none;
+                border-radius: 5px;
+                border-right: 5px solid transparent
+            }
+        }
+        label{
+            min-width: 400px;
+        }
+        .round-box{
+            border: solid 1px  rgb(255, 153, 109);
+            border-radius: 10px;
+            padding: 10px;
+            max-width: 600px;
+        }
+    }
+}
 .background{
     background-color: #F3E0B5;
     padding: 30px;
 }
-.setting-background {
-    position: absolute;
-    width: 400px;
-    height: 760px;
-    left: 0px;
-    top: 0px;
-    background-color: #d0f2ed;
-}
 
-.setting-title-container, .setting {
-    padding-left: 2rem;
-    padding-right: 4rem;
-    position: absolute;
-    top: 10%;
-    -ms-transform: translateY(-50%);
-    transform: translateY(-50%);
-
-    .title {
-        font-size: 40px;
-        text-align: center;
-        color: #FF996D;
-        font-weight: 800;
-    }
-
-    .round-box{
-        background-color: #F3E0B5;
-        border:solid 1px #FF996D;
-        padding: 20px;
-        border-radius: 10px;
-        margin-bottom: 30px;
-        margin-left: 30px;
-        margin-top: 10px;
-    }
-    .setting .left{
-        width: 30%;
-        background-color: lightblue;
-    }
-    .setting .right{
-        width: 70%;
-        background-color: #F3EDDE;
-        padding: 20px;
-    }
-
-    h2{
-        color:#FF996D;
-    }
-    .settingsBtn{
-        background-color: none;;
-        color: black;
-    }
-    .row{
-        display: flex;
-        height: 100vh;
-    }
-    .right fieldset {
-        border: none;
-        width: 400px;
-        border-radius: 10px;
-        display: flex;
-        justify-content: space-between;
-        background-color: transparent;
-        padding: 2px;
-    }
-
-}

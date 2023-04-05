@@ -59,6 +59,7 @@ export default function LeftNav(){
                 }} onClick={loadHomepage}>
                     Home
                 </Button>
+
         <Button className="feed"
                 onClick={loadProfile}
                 style={{
@@ -74,6 +75,19 @@ export default function LeftNav(){
                 }} >
             Profile
         </Button>
+                <Button className="chats" style={{
+                    background: '#F3E0B5',
+                    color: '#FF996D',
+                    fontFamily: 'Inter',
+                    fontStyle: 'normal',
+                    fontWeight: 600,
+                    fontSize: 26,
+                    textTransform: 'none',
+                    padding: 0,
+                    margin: 0
+                }} onClick={()=>navigate("/forums")}>
+                    Forum
+                </Button>
 
         <Button className="forum" style={{
             background: '#F3E0B5',
@@ -101,7 +115,8 @@ export default function LeftNav(){
         }} onClick={()=> navigate('/therapist')}>
             Therapists
         </Button>
-            <Button> <img className="set-image" src={image_setting} alt="setting_image" width="53"
+            <Button onClick={()=> navigate('/setting')}>
+                <img className="set-image" src={image_setting} alt="setting_image" width="53"
                           height="50" />
             </Button>
             </div>

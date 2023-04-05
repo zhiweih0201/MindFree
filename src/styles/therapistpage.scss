@@ -2,6 +2,7 @@
 body{
     background-color: #F3E0B5;
 }
+.Therapist{
 .h1{
     background-color: #DAEF9E;
     padding: 10px 20px;
@@ -38,7 +39,7 @@ body{
         height: 100px;
 
         @media (max-width: 1250px) {
-            width: 33%;
+            width: 30%;
         }
 
         @media (max-width: 600px) {
@@ -180,4 +181,6 @@ button.sm{
         display: block;
         margin-top: 5px;
     }
+}
+
 }

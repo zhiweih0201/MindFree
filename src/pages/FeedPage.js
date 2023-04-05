@@ -1,14 +1,14 @@
 import React, {useEffect, useState} from 'react';
 import Post from '../components/Post';
-import msToPostTime from '../utils/utilFunctions';
+
 import LeftNav from '../components/LeftNav'
 import '../styles/feedpage.scss';
 import {getThread, createThread} from '../services/thread-service'
-import {createPost} from "../services/post-service";
+
 import {connect} from "react-redux";
 import {useNavigate} from "react-router-dom";
 import {BsFillPlusSquareFill} from "react-icons/bs";
-import {MdModeEditOutline} from "react-icons/md";
+
 
 function FeedPage({user}) {
     //const dispatch = useDispatch()

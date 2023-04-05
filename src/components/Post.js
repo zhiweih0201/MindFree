@@ -8,6 +8,7 @@ import {connect} from "react-redux";
 import {AiFillDelete, AiFillHeart, AiOutlineHeart} from "react-icons/ai";
 import {IoIosArrowUp} from "react-icons/io";
 import {MdModeEditOutline, MdOutlineCancelPresentation, MdSave} from "react-icons/md";
+import {BsFlag} from "react-icons/bs";
 
 function Post({data,  children, getFeedData, user}) {
     const {
@@ -126,31 +127,18 @@ function Post({data,  children, getFeedData, user}) {
                 </div>
             <div>
                 <div className='likes-comments'>
-
-
                     <p className='comments' onClick={()=>setOpen(!open)}>{`${comments.length} comments`}</p>
                     {/*<AiFillHeart/>*/}
                     <p className='likes'>{`${likes.length} likes `}
-
                         {likes.includes(user._id) ? <AiFillHeart onClick={likeHandler}/>:     <AiOutlineHeart onClick={likeHandler}/>}
-
-
-
-
                     </p>
-
+                    <BsFlag ml={"5px"}/>
                     {username == user.username? <><
                         AiFillDelete onClick={deleteHandler}/>
                        </>:""}
-
                     {(username == user.username && !showEdit ) ?  <MdModeEditOutline  cursor={"pointer"} onClick={()=>setShowEdit(!showEdit)}/> : ""}
-
-
                     {showEdit ? <><MdOutlineCancelPresentation onClick={()=>setShowEdit(!showEdit)}/>
                         <MdSave onClick={editHandler} /></>: "" }
-
-
-
                 </div>
             </div>
                     <Collapsible trigger={<></>} open={open}>

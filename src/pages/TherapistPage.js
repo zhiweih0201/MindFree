@@ -146,7 +146,7 @@ export default function TherapistPage(props) {
 
     let speciality = ["marriage", "relationships", "anxiety", "drugs", "depression","school","sports"];
     //console.log("??",data,filteredData,  filteredData.length)
-    return <div className = 'background'>
+    return <div className = 'Therapist background'>
         <div className='logo'>
             <img src={logo} width="200px" />
         </div>
