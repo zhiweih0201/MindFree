@@ -146,7 +146,7 @@ function ProfilePage({user}) {
 
 
     return (
-       <div className={"flex"}>
+       <div className={"Profile flex"}>
                 <div className='profile-background left'>
                     <ProfileModal  />
                     <div className='profile-title-container'>
