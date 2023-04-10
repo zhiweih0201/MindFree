@@ -3,7 +3,10 @@ import React from "react";
 import LoginPage from './pages/LoginPage';
 import SignupPage from './pages/SignupPage';
 import FeedPage from './pages/FeedPage';
-import Chat from './pages/Chat';
+import ChatPage from './pages/ChatPage';
+import ChatAnyOne from './pages/ChatAnyOne';
+import ChatAnyTwo from './pages/ChatAnyTwo';
+import ChatAnyThree from './pages/ChatAnyThree';
 import Setting from './pages/Setting';
 import GeneralSetting from './pages/GeneralSetting';
 import SegmentSetting from './pages/SegmentSetting';
@@ -52,7 +55,19 @@ const router = createBrowserRouter([
   },
   {
     path: "/chat",
-    element: <Chat />
+    element: <ChatPage />
+  },
+  {
+    path: "/chatanyone",
+    element: <ChatAnyOne />
+  },
+  {
+    path: "/chatanytwo",
+    element: <ChatAnyTwo />
+  },
+  {
+    path: "/chatanythree",
+    element: <ChatAnyThree />
   },
   {
     path: "/setting",
