@@ -3,12 +3,12 @@ import Collapsible from 'react-collapsible';
 import Comment from './Comment';
 import '../styles/feedpost.scss';
 import msToPostTime from "../utils/utilFunctions";
-import {addComment, deleteThread, updateLike, updateThread} from "../services/thread-service";
+import {addComment, deleteThread, updateFlag, updateLike, updateThread} from "../services/thread-service";
 import {connect} from "react-redux";
 import {AiFillDelete, AiFillHeart, AiOutlineHeart} from "react-icons/ai";
 import {IoIosArrowUp} from "react-icons/io";
 import {MdModeEditOutline, MdOutlineCancelPresentation, MdSave} from "react-icons/md";
-import {BsFlag} from "react-icons/bs";
+import {BsFlag, BsFlagFill} from "react-icons/bs";
 import {ImProfile} from "react-icons/im";
 
 function Post({data,  children, getFeedData, user}) {
@@ -21,7 +21,8 @@ function Post({data,  children, getFeedData, user}) {
         body,
         likes,
         _id,
-        therapist
+        therapist, 
+        flag
     } = data;
     const [form, setForm] = useState({})
     const [editForm, setEditForm] = useState({
@@ -110,6 +111,18 @@ function Post({data,  children, getFeedData, user}) {
         })
     }
 
+    const flagHandler = async () =>{
+        console.log("flag")
+        const data = await updateFlag({
+            threadId: _id
+        })
+
+        //refresh the page
+        getFeedData()
+
+
+    }
+
 
 
 
@@ -141,7 +154,11 @@ function Post({data,  children, getFeedData, user}) {
                         <p className='likes'>{`${likes.length} likes `}
                             {likes.includes(user._id) ? <AiFillHeart onClick={likeHandler}/>:     <AiOutlineHeart onClick={likeHandler}/>}
                         </p>
-                        <BsFlag ml={"5px"}/>
+                        { flag? <BsFlagFill ml={"5px"} />:
+                            <BsFlag ml={"5px"} onClick={flagHandler}/>
+                        
+                        }
+                        
                         {username == user.username? <><
                             AiFillDelete onClick={deleteHandler}/>
                            </>:""}
