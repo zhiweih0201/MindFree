@@ -8,17 +8,19 @@ import '../styles/loginpage.scss';
 
 export default function LoginPage(props) {
     return (
+        <div className={"Login"}>
         <Grid>
-            <Grid.Col span={4}>
+            <Grid.Col span={4} className={"left"}>
                 <div className='login-container'>
                     <p className='title'>MindFree</p>
                     <LoginModal className='login-modal' />
                 </div>
             </Grid.Col>
-            <Grid.Col span={8}>
+            <Grid.Col span={8} className={"right"}>
                 <img className='banner' src={banner}/>
             </Grid.Col>
         </Grid>
+        </div>
     );
 
 }

@@ -21,3 +21,27 @@ export const createPost = async (data) => {
    const results = await response.json();
    return results
 }
+
+export const deletePost = async (data) => {
+    const response = await fetch( `${baseURL}/api/post/`, {
+        method: "DELETE",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data)
+    });
+    const results = await response.json();
+    return results.data
+}
+
+export const updatePost = async (data) => {
+    const response = await fetch( `${baseURL}/api/post`, {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data)
+    });
+    const results = await response.json();
+    return results.data
+}

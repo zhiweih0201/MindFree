@@ -13,6 +13,20 @@
     
 }
 
-.banner {
-    width: 63rem;
+
+
+.Login{
+    .left{
+
+    }
+    .right{
+        display: flex;
+        justify-content: center;
+        align-items: flex-end;
+        height: 100vh;
+        background-color: #e9e3db;
+        img{
+            width: 100%;
+        }
+    }
 }

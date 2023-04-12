@@ -2,13 +2,15 @@ import {Button} from "@mui/material";
 import image_setting from "../image/WechatIMG217.jpeg";
 import image_penn from "../image/UniversityofPennsylvania_FullLogo_RGB.jpg";
 import React from "react";
-import {useNavigate} from "react-router-dom";
+import {useLocation, useNavigate} from "react-router-dom";
 import '../styles/leftNav.scss';
 import {useDispatch} from "react-redux";
 import {storeUser} from "../redux/slices/authSlice";
 export default function LeftNav(){
     const navigate = useNavigate();
     const dispatch = useDispatch()
+    const location = useLocation();
+
 
     function loadHomepage() {
         return navigate('/homepage')
@@ -46,7 +48,7 @@ export default function LeftNav(){
         >
             Log Out
         </Button>
-                <Button className="chats" style={{
+                {location.pathname !== "/homepage" ?  <Button className="chats" style={{
                     background: '#F3E0B5',
                     color: '#FF996D',
                     fontFamily: 'Inter',
@@ -58,7 +60,8 @@ export default function LeftNav(){
                     margin: 0
                 }} onClick={loadHomepage}>
                     Home
-                </Button>
+                </Button>: ""}
+
 
         <Button className="feed"
                 onClick={loadProfile}

@@ -154,7 +154,7 @@ function Post({data,  children, getFeedData, user}) {
                         <p className='likes'>{`${likes.length} likes `}
                             {likes.includes(user._id) ? <AiFillHeart onClick={likeHandler}/>:     <AiOutlineHeart onClick={likeHandler}/>}
                         </p>
-                        { flag? <BsFlagFill ml={"5px"} />:
+                        { flag? <BsFlagFill ml={"5px"} onClick={flagHandler} />:
                             <BsFlag ml={"5px"} onClick={flagHandler}/>
                         
                         }

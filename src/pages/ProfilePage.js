@@ -11,25 +11,26 @@ import pic2 from '../assets/pic2.png';
 import pic3 from '../assets/pic3.png';
 import pic4 from '../assets/pic4.png';
 import {connect} from "react-redux";
-import {createPost, getPost} from "../services/post-service";
+import {createPost, deletePost, getPost, updatePost} from "../services/post-service";
 import {getProfile, createProfile, updateProfile} from "../services/profile-service";
 import {getThreadById} from "../services/thread-service";
-import {MdModeEditOutline} from "react-icons/md";
+import {MdModeEditOutline, } from "react-icons/md";
+
+import DiaryEntry from "../components/DiaryEntry";
 
 function ProfilePage({user}) {
 
     const [postData, setPostData] = useState(null);
     const [profileData, setProfileData] = useState(null);
     const [threadData, setThreadData] = useState(null)
-    const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
-        "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
-    ];
+
     const [inputValue, setInputValue] = useState("");
     const navigate = useNavigate();
 
     const [form, setForm] = useState({})
     const [showForm, setShowForm] = useState(false)
-    const [showEditForm, setShowEditForm] = useState(false);
+
+
 
     useEffect(()=>{
         console.log("do i have user?", user)
@@ -140,6 +141,9 @@ function ProfilePage({user}) {
         setShowForm(true)
 
     }
+
+
+
 
 
 
@@ -312,16 +316,7 @@ function ProfilePage({user}) {
                             {
                                 postData && postData.map((d,i)=>{
 
-                                    let monthIndex = parseInt(d.date.split("/")[0]) - 1;
-
-
-
-                                    return <div className='gridItem' key={i + "p"}>
-                                        <div className='date'>{d.date.split("/")[1]}
-                                            <small>{monthNames[monthIndex]}</small></div>
-                                        <div className="icon icon1"></div>
-                                        <div className="mess">{d.body}</div>
-                                    </div>
+                                   return <DiaryEntry key={d.body} data={d} i={i} getPostData={getPostData}/>
                                 })
                             }
 
