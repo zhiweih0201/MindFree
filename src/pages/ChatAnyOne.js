@@ -6,9 +6,12 @@ import { Button } from '@mui/material';
 import '../styles/chatAnyOne.scss';
 import ChatModal from '../components/ChatModal';
 import sendchat from '../assets/send chat.png';
+import io from 'socket.io-client';
 
+const socket = io.connect('http://localhost:3002');
+console.log(socket);
 
-export default function CHatAnyOne(props) {
+export default function ChatAnyOne(props) {
     const [content, setContent] = useState("");
     const navigate = useNavigate();
 
