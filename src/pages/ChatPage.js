@@ -9,41 +9,77 @@ import sendchat from '../assets/send chat.png';
 
 
 export default function ChatPage(props) {
-    const [content, setContent] = useState("");
-    const navigate = useNavigate();
+  const [content, setContent] = useState("");
+  const navigate = useNavigate();
 
-    function loadAnyOne() {
-      return navigate('/chatanyone')
-    }
+  function loadAnyOne() {
+    return navigate('/chatanyone')
+  }
 
-    function loadAnyTwo() {
-      return navigate('/chatanytwo')
-    }
+  function loadAnyTwo() {
+    return navigate('/chatanytwo')
+  }
 
-    function loadAnyThree() {
-      return navigate('/chatanythree')
-    }
+  function loadAnyThree() {
+    return navigate('/chatanythree')
+  }
 
-    return (
-      <Grid className='gridGroup'>
-          <Grid.Col span={4}>
-              <div className='chat-background'>
-                  <div className='chat-title-container'>
-                      <p className='title'>Chats</p>
-                  </div>
-                  <ChatModal />
-                  <div className='contact-person-1'>
-                      <Button className='contact-person-1-name' onClick={loadAnyOne}>Anonymous</Button>
-                  </div>
-                  <div className='contact-person-2'>
-                      <Button className='contact-person-2-name' onClick={loadAnyTwo}>Anonymous</Button>
-                  </div>
-                  <div className='contact-person-3'>
-                      <Button className='contact-person-3-name' onClick={loadAnyThree}>Anonymous</Button>
-                  </div>
-              </div>
-          </Grid.Col>
-      </Grid>
+  return (
+    <Grid className='gridGroup'>
+      <Grid.Col span={4}>
+        <div className='chat-background'>
+          <div className='chat-title-container'>
+            <p className='title'>Chats</p>
+          </div>
+          <ChatModal />
+          <div className='contact-person-1'>
+            <Button className='contact-person-1-name' style={{
+              background: 'rgba(243, 224, 181, 0.6)',
+              color: '#000000',
+              fontFamily: 'Inter',
+              fontStyle: 'normal',
+              fontWeight: 700,
+              fontSize: 20,
+              textTransform: 'none',
+              padding: 0,
+              margin: 0,
+              textAlign: 'left',
+              maxWidth: 150
+            }} onClick={loadAnyOne}>Anonymous</Button>
+          </div>
+          <div className='contact-person-2'>
+            <Button className='contact-person-2-name' style={{
+              background: 'rgba(243, 224, 181, 0.6)',
+              color: '#000000',
+              fontFamily: 'Inter',
+              fontStyle: 'normal',
+              fontWeight: 700,
+              fontSize: 20,
+              textTransform: 'none',
+              padding: 0,
+              margin: 0,
+              textAlign: 'left',
+              maxWidth: 150
+            }} onClick={loadAnyTwo}>Anonymous</Button>
+          </div>
+          <div className='contact-person-3'>
+            <Button className='contact-person-3-name' style={{
+              background: 'rgba(243, 224, 181, 0.6)',
+              color: '#000000',
+              fontFamily: 'Inter',
+              fontStyle: 'normal',
+              fontWeight: 700,
+              fontSize: 20,
+              textTransform: 'none',
+              padding: 0,
+              margin: 0,
+              textAlign: 'left',
+              maxWidth: 150
+            }} onClick={loadAnyThree}>Anonymous</Button>
+          </div>
+        </div>
+      </Grid.Col>
+    </Grid>
 
   );
 }
