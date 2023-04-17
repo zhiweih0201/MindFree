@@ -21,6 +21,7 @@ import ProfilePage from './pages/ProfilePage';
 import ProfileOtherView from './pages/ProfileOtherView';
 import TherapistPage from './pages/TherapistPage';
 import { store } from './redux/store';
+
 // import './App.css';
 
 const router = createBrowserRouter([

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Grid } from '@mantine/core';
 import { BrowserRouter as Router, Switch, Route, Link, Routes, useNavigate } from 'react-router-dom';
 import { TextInput, PasswordInput } from '@mantine/core';
@@ -7,13 +7,21 @@ import '../styles/chatAnyOne.scss';
 import ChatModal from '../components/ChatModal';
 import sendchat from '../assets/send chat.png';
 import io from 'socket.io-client';
+import '../styles/chat_style.scss';
 
 const socket = io.connect('http://localhost:3002');
 console.log(socket);
 
 export default function ChatAnyOne(props) {
-    const [content, setContent] = useState("");
+    const [content, setContent] = useState('');
+    const [room, setRoom] = useState('cis_160_room');
+    const [messages, setMessages] = useState([]);
+
     const navigate = useNavigate();
+
+    useEffect(() => {
+        socket.emit('join_room', room);
+    }, []);
 
     function loadAnyOne() {
         return navigate('/chatanyone')
@@ -27,6 +35,24 @@ export default function ChatAnyOne(props) {
         return navigate('/chatanythree')
     }
 
+    const sendMessage = async () => {
+        if (content !== '') {
+            const messageObj = {
+                room: room,
+                message: content,
+                time: new Date(Date.now()).getHours() + ':' + new Date(Date.now()).getMinutes()
+            }
+
+            await socket.emit('send_message', messageObj);
+            // setMessages((l) => [...new Set([...l, messageObj])]);
+        }
+    }
+
+    useEffect(() => {
+        socket.on('receive_message', (data) => {
+            setMessages((l) => [...new Set([...l, data])]);
+        });
+    }, [socket]);
 
     return (
         <Grid className='gridGroup'>
@@ -88,7 +114,20 @@ export default function ChatAnyOne(props) {
                     <p className='chat-person-name'>Anonymous</p>
                 </div>
                 <div className='chat-page'>
-
+                    {messages.map((m) => {
+                        return ( 
+                            <div className='message'>
+                                <div>
+                                    <div className='message-content'>
+                                        <p>{m.message}</p>
+                                    </div>
+                                    <div className='message-meta'>
+                                        <p>{m.time}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        );
+                    })}
                 </div>
                 <div className='chat-enter-text'>
                     <div className='chatbox-enter-content'>
@@ -99,7 +138,7 @@ export default function ChatAnyOne(props) {
                         />
                     </div>
                     <Button>
-                        <img className="sendchat" src={sendchat} alt="my image" />
+                        <img className="sendchat" src={sendchat} onClick={sendMessage} alt="my image" />
                     </Button>
                 </div>
             </Grid.Col>

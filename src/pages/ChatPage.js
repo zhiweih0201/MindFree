@@ -45,7 +45,7 @@ export default function ChatPage(props) {
               margin: 0,
               textAlign: 'left',
               maxWidth: 150
-            }} onClick={loadAnyOne}>Anonymous</Button>
+            }} onClick={loadAnyOne}>CIS 160</Button>
           </div>
           <div className='contact-person-2'>
             <Button className='contact-person-2-name' style={{
