@@ -26,6 +26,7 @@ export default function LoginModal(props) {
         }).then((loginResponse) => {
             setValidationMessage("")
             dispatch(storeUser(loginResponse.data))
+            localStorage.setItem('username', pennKey)
             loadHomepage();
         }).catch((err) => {
             console.log(err)

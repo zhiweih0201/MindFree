@@ -7,6 +7,8 @@ import '../styles/loginpage.scss';
 
 
 export default function LoginPage(props) {
+
+    
     return (
         <Grid>
             <Grid.Col span={4}>

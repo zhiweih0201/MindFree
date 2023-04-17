@@ -13,6 +13,7 @@ const socket = io.connect('http://localhost:3002');
 console.log(socket);
 
 export default function ChatAnyOne(props) {
+    const username = 'matt';
     const [content, setContent] = useState('');
     const [room, setRoom] = useState('cis_160_room');
     const [messages, setMessages] = useState([]);
@@ -40,11 +41,13 @@ export default function ChatAnyOne(props) {
             const messageObj = {
                 room: room,
                 message: content,
-                time: new Date(Date.now()).getHours() + ':' + new Date(Date.now()).getMinutes()
+                time: new Date(Date.now()).getHours() + ':' + new Date(Date.now()).getMinutes(),
+                author: username,
+                num: messages.length
             }
 
             await socket.emit('send_message', messageObj);
-            // setMessages((l) => [...new Set([...l, messageObj])]);
+            setMessages((l) => [...new Set([...l, messageObj])]);
         }
     }
 
@@ -116,7 +119,7 @@ export default function ChatAnyOne(props) {
                 <div className='chat-page'>
                     {messages.map((m) => {
                         return ( 
-                            <div className='message'>
+                            <div className='message' id={m.num % 2 === 1 ? 'you' : 'other'}>
                                 <div>
                                     <div className='message-content'>
                                         <p>{m.message}</p>

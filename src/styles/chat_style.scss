@@ -19,3 +19,32 @@
 .message-meta {
     color: grey;
 }
+
+#you {
+    justify-content: flex-end;
+}
+
+#you .message-content {
+    justify-content: flex-end;
+    margin-left: 400px;
+}
+
+#you .message-meta {
+    justify-content: flex-end;
+    margin-left: 400px;
+}
+
+#other {
+    justify-content: flex-end;
+}
+
+#other .message-content {
+    justify-content: flex-end;
+    background-color: cornflowerblue;
+    margin-left: 5px;
+}
+
+#other .message-meta {
+    justify-content: flex-end;
+    margin-left: 5px;
+}
